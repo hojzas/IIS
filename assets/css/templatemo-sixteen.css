@@ -836,6 +836,10 @@ footer .inner-content p a {
 	margin-left: 30px;
 }
 
+.left-content h6{
+	margin-bottom: 10px;
+}
+
 
 
 /* Send Message */
@@ -1031,6 +1035,7 @@ footer .inner-content p a {
 	.navbar .navbar-nav .nav-item {
 		border-bottom: 1px solid #eee;
 	}
+	
 	.navbar .navbar-nav .nav-item:last-child {
 		border-bottom: none;
 	}
