@@ -1,0 +1,9 @@
+.html:
+správa uživatelů
+správa festivalů
+správa interpretů
+správa rezervací
+rezervace festivalu (dodělat množství koupených vstupenek)
+uživatelovi rezervace
+uživatelův profil
+vyhledávání
