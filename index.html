@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-
+	
     <title>Hudební Festivaly</title>
 
     <!-- Bootstrap core CSS -->
@@ -48,23 +48,34 @@ https://templatemo.com/tm-546-sixteen-clothing
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="index.html">Domů
-                  <span class="sr-only">(current)</span>
-                </a>
-              </li> 
+          <div class="collapse navbar-collapse" id="navbarResponsive">			
+            
+			<!-- Search -->
+			<form class="search-bar-header" action="search.html">
+		      <input type="text" placeholder="Vyhledat..." name="search">
+			</form>
+			
+			<ul class="navbar-nav ml-auto">
               <li class="nav-item">
                 <a class="nav-link" href="festivals.html">Festivaly</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="interprets.html">Interpreti</a>
               </li>
+			  
+			  <!-- Not Logged -->
               <li class="nav-item">
 			    <div class="login">
                   <a class="nav-link" href="login.html">Přihlásit se</a>
 				</div>
+              </li>
+			  
+			  <!-- Logged -->
+			  <li class="nav-item">
+                <a class="nav-link" href="my-reservation.html">Moje rezervace</a>
+              </li>
+			  <li class="nav-item">
+                <a class="nav-link" href="profile.html">Profil</a>
               </li>
             </ul>
           </div>

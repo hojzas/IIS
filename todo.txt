@@ -1,9 +1,10 @@
 .html:
+interpret page
+lokalita page
 správa uživatelů
 správa festivalů
 správa interpretů
 správa rezervací
-rezervace festivalu (dodělat množství koupených vstupenek)
 uživatelovi rezervace
-uživatelův profil
-vyhledávání
+
+Lokalita v samostatné tabulce

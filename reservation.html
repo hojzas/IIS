@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <title>Název festivalu, 6. 6. 2021 z db //TODO</title>
+    <title>Hudební Festivaly - Rezervace vstupenek</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -69,57 +69,73 @@ https://templatemo.com/tm-546-sixteen-clothing
         </div>
       </nav>
     </header>
-	
-	<!-- Festival detail -->
-    <div class="festival-heading"></div>
 
-    <div class="best-features">
+    <!-- Page Content -->
+    <div class="empty-heading"></div>
+
+    <!-- Registration -->
+    <div class="send-message">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-              <h3>Název festivalu, 6. 6. 2021</h3>
+              <h2>Rezervace vstupenek na Název festivalu, 6. 6. 2021, 890 Kč</h2>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="left-content">
-              <h4><a style="color:#f33f3f;" href="#">Lokalita</a></h4>
-			  <p>Popis festivalu Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis amet elite author nulla.</p>
-              <h5>Program</h5><br>
-			  <h6>Stage:</h6>
-              <ul class="featured-list">
-                <li>17:00 <a href="#"><b>Interpret</b></a></li>
-                <li>17:00 <a href="#"><b>Interpret</b></a></li>
-                <li>17:00 <a href="#"><b>Interpret</b></a></li>
-                <li>17:00 <a href="#"><b>Interpret</b></a></li>
-                <li>17:00 <a href="#"><b>Interpret</b></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="right-image">
-              <img src="assets/images/product_01.jpg" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="call-to-action">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="inner-content">
-              <div class="row">
-                <div class="col-md-8">
-                  <h4>Cena vstupenky: <em>890 Kč</em></h4>
-                  <p>Zbývá 232/1000 vstupenek.</p>
+          <div class="col-md-8">
+		  
+		    <!-- Not Logged -->
+			<br><h6>Vyplnit údaje nebo <a style="color:#f33f3f;" href="login.html">se přihlásit</a></h6></br>
+            <div class="contact-form">
+              <form id="contact" action="" method="post">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="firstname" type="text" class="form-control" id="firstname" placeholder="Jméno" required="">
+                    </fieldset>
+                  </div>
+				  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="surname" type="text" class="form-control" id="surname" placeholder="Příjmení" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="email" type="text" class="form-control" id="email" placeholder="E-Mail" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <p>Formát: &lt;předvolba&gt;&lt;telefonní číslo&gt;, např.: 00420123456789</p>
+                      <input name="phonenumber" type="tel" class="form-control" id="phonenumber" placeholder="Telefoní číslo"  pattern="[0-9]{14}" required="">
+					</fieldset>
+                  </div>
+				  <!-- Not Logged -->
+				  
+				  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <p>Počet vstupenek:</p>
+					  <select name="quantity" id="quantity">
+					    <option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					  </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="form-submit" class="filled-button">Zarezervovat</button>
+                    </fieldset>
+                  </div>
                 </div>
-                <div class="col-md-4">
-                  <a href="reservation.html" class="filled-button">Zarezervovat</a>
-                </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>

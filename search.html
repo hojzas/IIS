@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <title>Hudební Festivaly - Festivaly</title>
+    <title>Hudební Festivaly - Vyhledávání</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -47,9 +47,8 @@ https://templatemo.com/tm-546-sixteen-clothing
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a class="nav-link" href="festivals.html">Festivaly</a>
-                  <span class="sr-only">(current)</span>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="interprets.html">Interpreti</a>
@@ -70,44 +69,87 @@ https://templatemo.com/tm-546-sixteen-clothing
     </header>
 
     <!-- Page Content -->
-    <div class="page-heading products-heading header-text">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="text-content">
-              <h4>new arrivals</h4>
-              <h2>sixteen products</h2>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <div class="empty-heading"></div>
     
     <div class="products">
-	
       <div class="container">
         <div class="row">
           <div class="col-md-12">
 		  
 			<!-- Filter -->
-			<form class="search-bar" action="search.html">
+			<form class="search-bar" action="#">
 		      <input type="text" placeholder="Vyhledat festival, interpreta, lokalitu..." name="search">
 			</form>
 			
             <div class="filters">
               <ul>
-                  <li class="active" data-filter="*">Všechny festivaly</li>
-                  <li data-filter=".2020">2020</li>
-                  <li data-filter=".2021">2021</li>
-                  <li data-filter=".2022">2022</li>
+                  <li class="active" data-filter=".festival">Festivaly</li>
+                  <li data-filter=".location">Lokality</li>
+                  <li data-filter=".interpret">Interprety</li>
               </ul>
             </div>
           </div>
           <div class="col-md-12">
+		  
+		    <!-- Festivals -->
+		    <div class="col-lg-12 col-md-12 col-sm-12 order">
+			  <fieldset>
+				  <p>Žánr:
+				  <select name="genre" id="genre">
+					<option value="all">Vše</option>
+					<option value="todo">zDB</option>
+			      </select>
+				  &nbsp;&nbsp;&nbsp;
+				  
+				  <input type="checkbox" id="available" name="available">
+				  <label for="available"> Pouze dostupné festivaly (zobrazí pouze nevyprodané festivaly)</label><br>
+				</p>
+			  </fieldset>
+			</div>
+			
+			<!-- Locations -->
+		    <div class="col-lg-12 col-md-12 col-sm-12 order">
+			  <fieldset>
+				<p>Řadit dle jména:
+				  <select name="order" id="order">
+					<option value="asc">Vzestupně</option>
+					<option value="desc">Sestupně</option>
+			      </select>
+				  &nbsp;&nbsp;&nbsp;
+				  
+				  <input type="checkbox" id="actualLocations" name="actualLocations">
+				  <label for="actualLocations"> Aktuální (zobrazí pouze místa, kde se aktuálně festivaly konají)</label><br>
+				</p>
+			  </fieldset>
+			</div>
+			
+			<!-- Interprets -->
+		    <div class="col-lg-12 col-md-12 col-sm-12 order">
+			  <fieldset>
+				<p>Řadit dle jména:
+				  <select name="order" id="order">
+					<option value="asc">Vzestupně</option>
+					<option value="desc">Sestupně</option>
+			      </select>
+				  &nbsp;&nbsp;&nbsp;
+				  
+				  Žánr:
+				  <select name="genre" id="genre">
+					<option value="all">Vše</option>
+					<option value="todo">zDB</option>
+			      </select>
+				  &nbsp;&nbsp;&nbsp;
+				  
+				  <input type="checkbox" id="actualInterprets" name="actualInterprets">
+				  <label for="actualInterprets"> Aktuální (zobrazí pouze interprety, kteří budou vystupovat na některém z nadcházejících festivalů)</label><br>
+				</p>
+				</p>
+			  </fieldset>
+			</div>
+			
             <div class="filters-content">
                 <div class="row grid">
-                    <div class="col-lg-4 col-md-4 all popular">
+                    <div class="col-lg-4 col-md-4 all festival">
                       <div class="product-item">
                         <a href="#"><img src="assets/images/product_01.jpg" alt=""></a>
                         <div class="down-content">
@@ -125,7 +167,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 all popular">
+                    <div class="col-lg-4 col-md-4 all festival">
                       <div class="product-item">
                         <a href="#"><img src="assets/images/product_02.jpg" alt=""></a>
                         <div class="down-content">
@@ -143,7 +185,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 all 2020">
+                    <div class="col-lg-4 col-md-4 all location">
                       <div class="product-item">
                         <a href="#"><img src="assets/images/product_03.jpg" alt=""></a>
                         <div class="down-content">
@@ -161,7 +203,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 all 2021">
+                    <div class="col-lg-4 col-md-4 all interpret">
                       <div class="product-item">
                         <a href="#"><img src="assets/images/product_04.jpg" alt=""></a>
                         <div class="down-content">
@@ -179,7 +221,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 all 2020">
+                    <div class="col-lg-4 col-md-4 all interpret">
                       <div class="product-item">
                         <a href="#"><img src="assets/images/product_05.jpg" alt=""></a>
                         <div class="down-content">
@@ -197,7 +239,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 all 2021">
+                    <div class="col-lg-4 col-md-4 all interpret">
                       <div class="product-item">
                         <a href="#"><img src="assets/images/product_06.jpg" alt=""></a>
                         <div class="down-content">
