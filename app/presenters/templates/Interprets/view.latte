@@ -1,0 +1,76 @@
+{block title}
+  Interpreti
+{/block}
+
+{block header}
+	<li class="nav-item" n:if="$user->loggedIn">
+	  <a class="nav-link" href="my-reservation.html">Moje rezervace</a>
+	</li>
+	<li class="nav-item" n:if="$user->loggedIn">
+	  <a class="nav-link" href="profile.html">Profil</a>
+	</li>
+	<li class="nav-item" n:if="!$user->loggedIn">
+	  <div class="login">
+	    <a class="nav-link" href="login.html">Přihlásit se</a>
+	  </div>
+    </li>
+{/block}
+
+{block content}
+	<div class="page-heading about-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-content">
+              <h4>about us</h4>
+              <h2>our company</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="team-members">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="team-member">
+              <div class="thumb-container">
+                <img src="{$basePath}/assets/images/team_01.jpg" alt="">
+                <div class="hover-effect">
+                  <div class="hover-content">
+                    <ul class="social-icons">
+                      <li><a href="https://www.facebook.com/vypsanafixa/"><i class="fa fa-facebook"></i></a></li>
+                      <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="down-content">
+                <h4>Vypsaná fiXa</h4>
+                <span>člen, člen další</span>
+                <p>Popis</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+	
+	<!-- Page number -->
+	<div class="products">
+      <div class="container">
+	    <div class="row">
+	      <div class="col-md-12">
+            <ul class="pages">
+              <li><a href="#">1</a></li>
+              <li class="active"><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>

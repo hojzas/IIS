@@ -1,0 +1,95 @@
+{block title}
+	Festivaly
+{/block}
+
+{block content}
+	<div class="empty-heading"></div>
+    
+    <div class="products">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Search -->
+            <form class="search-bar" action="#">
+              {control searchForm}
+            </form>
+          </div>
+          <div class="col-md-12">
+		  
+		    <!-- Festivals -->
+		    <div class="col-lg-12 col-md-12 col-sm-12 order">
+			  <fieldset>
+				  <p>Žánr:
+				  <select name="genre" id="genre">
+					<option value="all">Vše</option>
+					<option value="todo">zDB</option>
+			      </select>
+				  &nbsp;&nbsp;&nbsp;
+				  
+				  <input type="checkbox" id="available" name="available">
+				  <label for="available"> Pouze dostupné festivaly (zobrazí pouze nevyprodané festivaly)</label><br>
+				</p>
+			  </fieldset>
+			</div>
+			
+			<!-- Interprets -->
+		    <div class="col-lg-12 col-md-12 col-sm-12 order">
+			  <fieldset>
+				<p>Řadit dle jména:
+				  <select name="order" id="order">
+					<option value="asc">Vzestupně</option>
+					<option value="desc">Sestupně</option>
+			      </select>
+				  &nbsp;&nbsp;&nbsp;
+				  
+				  Žánr:
+				  <select name="genre" id="genre">
+					<option value="all">Vše</option>
+					<option value="todo">zDB</option>
+			      </select>
+				  &nbsp;&nbsp;&nbsp;
+				  
+				  <input type="checkbox" id="actualInterprets" name="actualInterprets">
+				  <label for="actualInterprets"> Aktuální (zobrazí pouze interprety, kteří budou vystupovat na některém z nadcházejících festivalů)</label><br>
+				</p>
+				</p>
+			  </fieldset>
+			</div>
+			
+            <div class="filters-content">
+                <div class="row grid">
+                    <div class="col-lg-4 col-md-4 all festival">
+                      <div class="product-item">
+                        <a href="#"><img src="assets/images/product_01.jpg" alt=""></a>
+                        <div class="down-content">
+                          <a href="detail.html"><h4>Tittle goes here</h4></a>
+                          <h6>$18.25</h6>
+                          <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
+                          <ul class="stars">
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                          </ul>
+                          <span>Reviews (12)</span>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+		  
+		  <!-- Page number -->
+          <div class="col-md-12">
+            <ul class="pages">
+              <li><a href="#">1</a></li>
+              <li class="active"><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
