@@ -361,7 +361,19 @@ VALUES
 -- Insert `admin`
 --
 INSERT INTO divak (jmeno, prijmeni, telefon, email, heslo, rol_id)
-VALUES ('admin','admin','123456789','admin@festivaly.cz', 'admin', 1);
+VALUES ('admin','admin','123456789','admin@fest.cz', '123', 1);
+
+--
+-- Insert `organiser`
+--
+INSERT INTO divak (jmeno, prijmeni, telefon, email, heslo, rol_id)
+VALUES ('organiser','organiser','123456789','organiser@fest.cz', '123', 1);
+
+--
+-- Insert `accountant`
+--
+INSERT INTO divak (jmeno, prijmeni, telefon, email, heslo, rol_id)
+VALUES ('ucetni','ucetni','123456789','ucetni@fest.cz', '123', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

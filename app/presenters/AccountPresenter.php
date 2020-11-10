@@ -129,15 +129,17 @@ final class AccountPresenter extends BasePresenter
 			$row = $this->database->table('divak')
 			->where('div_ID', $this->user->getId())
 			->fetch();
-			
-            if (strcmp($row->heslo, $values->passOld) == 0) {
+            
+            $hash = sha1($values->passOld);
+
+            if (strcmp($row->heslo, $hash) == 0) {
                 if (strcmp($values->passNew, $values->passNewCheck) == 0) {
                     
                     // update
                     $count = $this->database->table('divak')
                     ->where('div_ID', $this->user->getId())
                     ->update([
-                        'heslo' => $values->passNew,
+                        'heslo' => sha1($values->passNew),
                     ]);
                     
                     $this->flashMessage('Heslo úspěšně změněno.');
