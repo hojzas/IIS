@@ -32,7 +32,19 @@ CREATE TABLE `divak` (
   `prijmeni` varchar(20) COLLATE utf8_czech_ci NOT NULL,
   `telefon` int(9) NOT NULL,
   `email` varchar(255) COLLATE utf8_czech_ci NOT NULL,
-  `heslo` varchar(255) COLLATE utf8_czech_ci NOT NULL
+  `heslo` varchar(255) COLLATE utf8_czech_ci NOT NULL,
+  `rol_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role`
+--
+
+CREATE TABLE `role` (
+  `rol_ID` int(11) NOT NULL,
+  `nazev` varchar(10) COLLATE utf8_czech_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 -- --------------------------------------------------------
@@ -61,8 +73,7 @@ CREATE TABLE `festival` (
 CREATE TABLE `interpret` (
   `int_ID` int(11) NOT NULL,
   `nazev` varchar(50) COLLATE utf8_czech_ci NOT NULL,
-  `logo` varchar(100) COLLATE utf8_czech_ci NOT NULL,
-  `zanr` varchar(50) COLLATE utf8_czech_ci NOT NULL
+  `logo` varchar(100) COLLATE utf8_czech_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 -- --------------------------------------------------------
@@ -159,7 +170,14 @@ CREATE TABLE `vystupuje` (
 -- Indexes for table `divak`
 --
 ALTER TABLE `divak`
-  ADD PRIMARY KEY (`div_ID`);
+  ADD PRIMARY KEY (`div_ID`),
+  ADD KEY `rol_ID` (`rol_id`);
+
+--
+-- Indexes for table `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`rol_ID`);
 
 --
 -- Indexes for table `festival`
@@ -231,6 +249,11 @@ ALTER TABLE `vystupuje`
 ALTER TABLE `divak`
   MODIFY `div_ID` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `role`
+--
+ALTER TABLE `role`
+  MODIFY `rol_ID` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `festival`
 --
 ALTER TABLE `festival`
@@ -279,6 +302,13 @@ ALTER TABLE `rezervace`
   ADD CONSTRAINT `FK_fes_rez` FOREIGN KEY (`fes_id`) REFERENCES `festival` (`fes_ID`);
 
 --
+-- Constraints for table `divak`
+--
+ALTER TABLE `divak`
+  ADD CONSTRAINT `FK_rol_div` FOREIGN KEY (`rol_id`) REFERENCES `role` (`rol_ID`);
+
+
+--
 -- Constraints for table `stage`
 --
 ALTER TABLE `stage`
@@ -316,6 +346,22 @@ VALUES
     ('Reggae'),
     ('Metal'),
     ('RnB');
+	
+--
+-- Insert `role`
+--
+INSERT INTO role (nazev)
+VALUES
+	('admin'),
+    ('organiser'),
+    ('accountant'),
+    ('user');
+	
+--
+-- Insert `admin`
+--
+INSERT INTO divak (jmeno, prijmeni, telefon, email, heslo, rol_id)
+VALUES ('admin','admin','123456789','admin@festivaly.cz', 'admin', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

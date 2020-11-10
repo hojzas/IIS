@@ -9,5 +9,9 @@ use Nette;
 
 final class RegistrationPresenter extends BasePresenter
 {
+    /*
+    ->setHtmlType('tel')
+    ->setEmptyValue('+420');
+    */
 
 }

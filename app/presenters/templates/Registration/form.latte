@@ -2,20 +2,6 @@
   Interpreti
 {/block}
 
-{block header}
-	<li class="nav-item" n:if="$user->loggedIn">
-	  <a class="nav-link" href="my-reservation.html">Moje rezervace</a>
-	</li>
-	<li class="nav-item" n:if="$user->loggedIn">
-	  <a class="nav-link" href="profile.html">Profil</a>
-	</li>
-	<li class="nav-item" n:if="!$user->loggedIn">
-	  <div class="login">
-	    <a class="nav-link" href="login.html">Přihlásit se</a>
-	  </div>
-    </li>
-{/block}
-
 {block content}
 	<div class="empty-heading"></div>
 

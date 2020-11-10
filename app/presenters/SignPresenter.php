@@ -25,13 +25,14 @@ final class SignPresenter extends BasePresenter
 	{
 		$form = new Form;
 		$form->addEmail('email', '')
-			->setRequired('Prosím zadejte Váš email.');
-		$form->setHtmlAttribute('placeholder', 'E-Mail');
-		$form->setHtmlAttribute('class', 'form-control');
+			->setRequired('Prosím zadejte Váš email.')
+			->setHtmlAttribute('placeholder', 'E-Mail')
+			->setHtmlAttribute('class', 'form-control');
 
 		$form->addPassword('password', '')
-			->setRequired('Prosím zadejte Vaše heslo.');
-		$form->setHtmlAttribute('placeholder', 'Heslo');
+			->setRequired('Prosím zadejte Vaše heslo.')
+			->setHtmlAttribute('placeholder', 'Heslo')
+			->setHtmlAttribute('class', 'form-control');
 
 		$form->addSubmit('send', 'Přihlásit se');
 
@@ -52,10 +53,11 @@ final class SignPresenter extends BasePresenter
 			} else {
 			
 				if (strcmp($row->heslo, $values->password) == 0) {
-
+					
 					// successfully log in
+					$this->flashMessage("Přihlášen uživatel $row->jmeno");
 					$this->user->setExpiration('30 minutes');
-					$this->user->login(new Nette\Security\Identity($row->div_ID, null, null));
+					$this->user->login(new Nette\Security\Identity($row->div_ID, $row->rol_ID->nazev, null));
 					$this->redirect('Homepage:');
 				}
 				$form->addError('Incorrect username or password.');

@@ -33,6 +33,9 @@
               <img src="{$basePath}/assets/images/product_01.jpg" alt="">
             </div>
           </div>
+          {if $user->isInRole('admin', 'organiser')}
+            <a n:href="Festival:book" class="filled-button">Upravit obsah</a>
+          {/if}
         </div>
       </div>
     </div>
