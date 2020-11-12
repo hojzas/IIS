@@ -130,9 +130,9 @@ final class AccountPresenter extends BasePresenter
 			->where('div_ID', $this->user->getId())
 			->fetch();
             
-            $hash = sha1($values->passOld);
+            $hashedPassword = sha1($values->passOld);
 
-            if (strcmp($row->heslo, $hash) == 0) {
+            if (strcmp($row->heslo, $hashedPassword) == 0) {
                 if (strcmp($values->passNew, $values->passNewCheck) == 0) {
                     
                     // update
@@ -143,6 +143,7 @@ final class AccountPresenter extends BasePresenter
                     ]);
                     
                     $this->flashMessage('Heslo úspěšně změněno.');
+                    $this->redirect('Account:detail');
 
                 } else {
                     $form->addError('Zadaná hesla se neshodují!');
@@ -158,4 +159,12 @@ final class AccountPresenter extends BasePresenter
 		}
         
     }
+
+    // log out
+	public function actionOut(): void
+	{
+		$this->getUser()->logout();
+		$this->flashMessage('Odhlášení proběhlo úspěšně.');
+		$this->redirect('Homepage:');
+	}
 }

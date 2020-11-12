@@ -51,17 +51,24 @@ https://templatemo.com/tm-546-sixteen-clothing
           <div class="collapse navbar-collapse" id="navbarResponsive">			
          
           <ul class="navbar-nav ml-auto">
+
+            {if $user->isInRole('admin') || $user->isInRole('organiser') || $user->isInRole('accountant')}
+              <li class="nav-item">
+                <a class="nav-link" href="Festival:search">Správa</a>
+              </li>
+            {/if}
+
             <li class="nav-item">
-              <a class="nav-link" n:href="Festival:search">Vyhledávání</a>
+              <a class="nav-link" n:href="Festival:search">Hledat</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" n:href="Festival:view">Festivaly</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" n:href="Interprets:view">Interpreti</a>
+              <a class="nav-link" n:href="Interpret:view">Interpreti</a>
             </li>
       
-            <!-- depends on logged state -->
+            <!-- depends on loggedin state -->
             {if $user->loggedIn}
               <li class="nav-item">
                 <a class="nav-link" n:href="Account:myreservation">Moje rezervace</a>

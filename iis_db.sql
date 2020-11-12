@@ -73,31 +73,8 @@ CREATE TABLE `festival` (
 CREATE TABLE `interpret` (
   `int_ID` int(11) NOT NULL,
   `nazev` varchar(50) COLLATE utf8_czech_ci NOT NULL,
-  `logo` varchar(100) COLLATE utf8_czech_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `je_clenem`
---
-
-CREATE TABLE `je_clenem` (
-  `int_id` int(11) NOT NULL,
-  `cln_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `muzikant`
---
-
-CREATE TABLE `muzikant` (
-  `cln_ID` int(11) NOT NULL,
-  `jmeno` varchar(20) COLLATE utf8_czech_ci NOT NULL,
-  `prijmeni` varchar(20) COLLATE utf8_czech_ci NOT NULL,
-  `profese` varchar(50) COLLATE utf8_czech_ci NOT NULL
+  `logo` varchar(100) COLLATE utf8_czech_ci NOT NULL,
+  `clenove` varchar(200) COLLATE utf8_czech_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 -- --------------------------------------------------------
@@ -192,19 +169,6 @@ ALTER TABLE `interpret`
   ADD PRIMARY KEY (`int_ID`);
 
 --
--- Indexes for table `je_clenem`
---
-ALTER TABLE `je_clenem`
-  ADD KEY `int_id` (`int_id`),
-  ADD KEY `cln_id` (`cln_id`);
-
---
--- Indexes for table `muzikant`
---
-ALTER TABLE `muzikant`
-  ADD PRIMARY KEY (`cln_ID`);
-
---
 -- Indexes for table `rezervace`
 --
 ALTER TABLE `rezervace`
@@ -264,11 +228,6 @@ ALTER TABLE `festival`
 ALTER TABLE `interpret`
   MODIFY `int_ID` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `muzikant`
---
-ALTER TABLE `muzikant`
-  MODIFY `cln_ID` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `rezervace`
 --
 ALTER TABLE `rezervace`
@@ -286,13 +245,6 @@ ALTER TABLE `zanr`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `je_clenem`
---
-ALTER TABLE `je_clenem`
-  ADD CONSTRAINT `FK_int_clenem` FOREIGN KEY (`int_id`) REFERENCES `interpret` (`int_ID`),
-  ADD CONSTRAINT `FK_muz_clenem` FOREIGN KEY (`cln_id`) REFERENCES `muzikant` (`cln_ID`);
 
 --
 -- Constraints for table `rezervace`
@@ -333,8 +285,6 @@ ALTER TABLE `vystupuje`
 --
 INSERT INTO zanr (nazev)
 VALUES
-	('Pop'),
-    ('Punk'),
     ('Blues'),
     ('Country'),
     ('Disco'),
@@ -343,9 +293,11 @@ VALUES
     ('Funk'),
     ('Hip Hop'),
     ('Jazz'),
-    ('Reggae'),
     ('Metal'),
+	('Pop'),
+    ('Punk'),
     ('RnB');
+    ('Reggae'),
 	
 --
 -- Insert `role`
@@ -358,22 +310,28 @@ VALUES
     ('user');
 	
 --
--- Insert `admin`
+-- Insert `admin`, password: '123'
 --
 INSERT INTO divak (jmeno, prijmeni, telefon, email, heslo, rol_id)
-VALUES ('admin','admin','123456789','admin@fest.cz', '123', 1);
+VALUES ('admin','admin','123456789','admin@fest.cz', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1);
 
 --
--- Insert `organiser`
+-- Insert `organiser`, password: '123'
 --
 INSERT INTO divak (jmeno, prijmeni, telefon, email, heslo, rol_id)
-VALUES ('organiser','organiser','123456789','organiser@fest.cz', '123', 1);
+VALUES ('organiser','organiser','123456789','organiser@fest.cz', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2);
 
 --
--- Insert `accountant`
+-- Insert `accountant`, password: '123'
 --
 INSERT INTO divak (jmeno, prijmeni, telefon, email, heslo, rol_id)
-VALUES ('ucetni','ucetni','123456789','ucetni@fest.cz', '123', 1);
+VALUES ('ucetni','ucetni','123456789','ucetni@fest.cz', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 3);
+
+--
+-- Insert `user`, password: '123'
+--
+INSERT INTO divak (jmeno, prijmeni, telefon, email, heslo, rol_id)
+VALUES ('user','user','123456789','user@fest.cz', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 4);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

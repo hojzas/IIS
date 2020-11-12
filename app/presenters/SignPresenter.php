@@ -10,6 +10,14 @@ use Nette\Application\UI\Form;
 
 final class SignPresenter extends BasePresenter
 {
+	protected function startup()
+    {
+        parent::startup();
+        if ($this->getUser()->isLoggedIn()) {
+            $this->redirect('Account:detail');
+        }
+    }
+
 	/** @var Nette\Database\Context */
 	private $database;
 
@@ -25,6 +33,7 @@ final class SignPresenter extends BasePresenter
 	{
 		$form = new Form;
 		$form->addEmail('email', '')
+			->setDefaultValue('@fest.cz')
 			->setRequired('Prosím zadejte Váš email.')
 			->setHtmlAttribute('placeholder', 'E-Mail')
 			->setHtmlAttribute('class', 'form-control');
@@ -49,10 +58,12 @@ final class SignPresenter extends BasePresenter
 			->fetch();
 
 			if (!$row) {
-				$form->addError('User not found.');
+				$form->addError('Uživatel se zadaným emailem nenalezen.');
 			} else {
+
+				$hashedPassword = sha1($values->password);
 			
-				if (strcmp($row->heslo, $values->password) == 0) {
+				if (strcmp($row->heslo, $hashedPassword) == 0) {
 					
 					// successfully log in
 					$this->flashMessage("Přihlášen uživatel $row->jmeno");
@@ -60,20 +71,11 @@ final class SignPresenter extends BasePresenter
 					$this->user->login(new Nette\Security\Identity($row->div_ID, $row->rol_ID->nazev, null));
 					$this->redirect('Homepage:');
 				}
-				$form->addError('Incorrect username or password.');
+				$form->addError('Nesprávné přihlašovací údaje.');
 			}
 
 		} catch (Nette\Security\AuthenticationException $e) {
-			$form->addError('Incorrect username or password.');
+			$form->addError('Nesprávné přihlašovací údaje.');
 		}
-	}
-
-
-	// log out
-	public function actionOut(): void
-	{
-		$this->getUser()->logout();
-		$this->flashMessage('Odhlášení proběhlo úspěšně.');
-		$this->redirect('Homepage:');
 	}
 }
