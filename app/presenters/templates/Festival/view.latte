@@ -15,7 +15,6 @@
         </div>
       </div>
     </div>
-
     
     <div class="products">
 	
@@ -24,57 +23,40 @@
           <div class="col-md-12">			
             <div class="filters">
               <ul>
-                  <li class="active" data-filter="*">Všechny festivaly</li>
-                  <li data-filter=".2020">2020</li>
-                  <li data-filter=".2021">2021</li>
-                  <li data-filter=".2022">2022</li>
+                <li class="active" data-filter="*">Všechny festivaly</li>
+                <li data-filter=".2020">2020</li>
+                <li data-filter=".2021">2021</li>
+                <li data-filter=".2022">2022</li>
               </ul>
             </div>
           </div>
           <div class="col-md-12">
             <div class="filters-content">
-                <div class="row grid">
-                    <div class="col-lg-4 col-md-4 all popular">
-                      <div class="product-item">
-                        <a href="#"><img src="{$basePath}/assets/images/product_01.jpg" alt=""></a>
-                        <div class="down-content">
-                          <h4><a n:href="Festival:detail">Tittle goes here</a></h4>
-                          <h6>$18.25</h6>
-                          <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                          <ul class="stars">
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                          </ul>
-                          <span>Reviews (12)</span>
-                        </div>
+              <div class="row grid">
+
+                {foreach $festivals as $festival}
+                  <div class="col-lg-4 col-md-4 all {$festival->datum->format('Y')|noescape}">
+                    <div class="product-item">
+                      <a n:href="Festival:info $festival->fes_ID"><img src="{$basePath}/assets/images/product_01.jpg" alt=""></a>
+                      <div class="down-content">
+                        <h4><a n:href="Festival:info $festival->fes_ID">{$festival->nazev}</a></h4>
+                        <h6>{$festival->cena},- Kč</h6>
+                        <p>kapely...</p>
+                        <ul class="stars">
+                          <li>{$festival->datum->format('j.n.Y')}</li>
+                        </ul>
+                        <span>{$festival->misto}</span>
                       </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 all popular">
-                      <div class="product-item">
-                        <a href="#"><img src="assets/images/product_02.jpg" alt=""></a>
-                        <div class="down-content">
-                          <a href="#"><h4>Tittle goes here</h4></a>
-                          <h6>$16.75</h6>
-                          <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                          <ul class="stars">
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                          </ul>
-                          <span>Reviews (24)</span>
-                        </div>
-                      </div>
-                    </div>
-                </div>
+                  </div>
+                {/foreach}
+              
+              </div>                
             </div>
           </div>
+        </div>
 		  
-		  <!-- Page number -->
+		    <!-- Page number -->
           <div class="col-md-12">
             <ul class="pages">
               <li><a href="#">1</a></li>
@@ -83,7 +65,6 @@
               <li><a href="#">4</a></li>
               <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
             </ul>
-          </div>
         </div>
       </div>
     </div>

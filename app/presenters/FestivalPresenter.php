@@ -6,10 +6,38 @@ namespace App\Presenters;
 
 use Nette;
 use Nette\Application\UI\Form;
+use App\Model\FestivalModel;
 
 
 final class FestivalPresenter extends BasePresenter
 {
+	/** @var FestivalModel */
+	private $festivalModel;
+		
+	public function __construct(FestivalModel $festivalModel)
+	{
+		$this->festivalModel = $festivalModel;
+	}
+
+	/**
+	 * Render festival view.
+	 */
+    public function renderView(int $page = 1): void
+	{
+		$this->festivalModel->renderView($this, $page);
+	}
+
+	/**
+	 * Render festival detail.
+	 */
+	public function renderInfo(int $id): void
+	{
+		$this->festivalModel->renderFestivalInfo($this, $id);
+	}
+
+	/**
+	 * Search.
+	 */
     protected function createComponentSearchForm() {
 
 		$form = new Form;

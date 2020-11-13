@@ -291,13 +291,16 @@ VALUES
     ('Electro'),
     ('Folk'),
     ('Funk'),
+    ('Grunge'),
     ('Hip Hop'),
+    ('House'),
     ('Jazz'),
     ('Metal'),
 	('Pop'),
     ('Punk'),
-    ('RnB');
-    ('Reggae'),
+    ('RnB'),
+    ('Rock'),
+    ('Reggae');
 	
 --
 -- Insert `role`

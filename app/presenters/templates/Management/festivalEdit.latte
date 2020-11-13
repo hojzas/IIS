@@ -1,27 +1,30 @@
 {block title}
-  Změna hesla
+  Správa festivalu
 {/block}
 
 {block content}
 	<div class="empty-heading"></div>
+
+    <!-- Festival management -->
     <div class="send-message">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-              <a style="color:#f33f3f;" n:href="Account:detail">&lt; Zpět na můj účet<i class="fa"></i></a><br><br>
-              <h2>Změna hesla</h2>
+              <a style="color:#f33f3f;" n:href="Festival:info $festivalID">&lt; Zpět na detail festivalu<i class="fa"></i></a><br><br>
+              <h2>Úprava kapely</h2>
             </div>
           </div>
           <div class="col-md-8">
             <div class="contact-form">
               <form id="contact" action="" method="post">
                
-                {control passwordForm}
-    
+                {control festivalEditForm}
+
               </form>
             </div>
           </div>
+
         </div>
       </div>
     </div>

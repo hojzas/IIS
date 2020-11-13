@@ -1,5 +1,5 @@
 {block title}
-	Detail
+	{$festival->nazev}
 {/block}
 
 {block content}
@@ -10,22 +10,21 @@
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-              <h3>Název festivalu, 6. 6. 2021</h3>
+              <a style="color:#f33f3f;" n:href="Festival:view">&lt; Zpět na seznam festivalů<i class="fa"></i></a><br><br>
+              <h3>{$festival->nazev}, {$festival->datum->format('j.n.Y')}</h3>
             </div>
           </div>
           <div class="col-md-6">
             <div class="left-content">
-              <h4><a style="color:#f33f3f;" href="#">Lokalita</a></h4>
-			        <p>Popis festivalu Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis amet elite author nulla.</p>
-              <h5>Program</h5><br>
-			        <h6>Stage:</h6>
+              <h4><a style="color:#f33f3f;" href="#">{$festival->misto}</a></h4>
+			        <p>{$festival->popis}</p>
+              <h5>Program:</h5><br>
+
+			        <h6>Velká Stage</h6>
               <ul class="featured-list">
                 <li>17:00 <a href="#"><b>Interpret</b></a></li>
-                <li>17:00 <a href="#"><b>Interpret</b></a></li>
-                <li>17:00 <a href="#"><b>Interpret</b></a></li>
-                <li>17:00 <a href="#"><b>Interpret</b></a></li>
-                <li>17:00 <a href="#"><b>Interpret</b></a></li>
               </ul>
+
             </div>
           </div>
           <div class="col-md-6">
@@ -35,13 +34,12 @@
           </div>
 
           {if $user->isInRole('admin') || $user->isInRole('organiser')}
-            <a n:href="Festival:book" class="filled-button">Upravit obsah</a>
+            <a n:href="Management:festivalEdit $festival->fes_ID" class="filled-button">Upravit obsah</a>
           {/if}
           
         </div>
       </div>
     </div>
-
 
     <div class="call-to-action">
       <div class="container">
@@ -50,8 +48,8 @@
             <div class="inner-content">
               <div class="row">
                 <div class="col-md-8">
-                  <h4>Cena vstupenky: <em>890 Kč</em></h4>
-                  <p>Zbývá 232/1000 vstupenek.</p>
+                  <h4>Cena vstupenky: <em>{$festival->cena},- Kč</em></h4>
+                  <p>Dostupné vstupenky: 232/{$festival->kapacita}.</p>
                 </div>
                 <div class="col-md-4">
                   <a n:href="Festival:book" class="filled-button">Zarezervovat</a>

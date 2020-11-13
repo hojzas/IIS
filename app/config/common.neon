@@ -18,3 +18,9 @@ security:
 
 services:
 	router: App\Router\RouterFactory::createRouter
+	- App\Model\CheckPasswordModel
+	- App\Model\InterpretModel
+	- App\Model\InterpretManagerModel
+	- App\Model\FestivalModel
+	- App\Model\FesticalManagerModel
+	- App\Model\AccountModel

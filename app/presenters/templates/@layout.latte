@@ -54,7 +54,7 @@ https://templatemo.com/tm-546-sixteen-clothing
 
             {if $user->isInRole('admin') || $user->isInRole('organiser') || $user->isInRole('accountant')}
               <li class="nav-item">
-                <a class="nav-link" href="Festival:search">Správa</a>
+                <a class="nav-link" n:href="Management:">Správa</a>
               </li>
             {/if}
 

@@ -1,5 +1,5 @@
 {block title}
-  Detail
+  {$band->nazev}
 {/block}
 
 {block content}
@@ -10,6 +10,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
+              <a style="color:#f33f3f;" n:href="Interpret:view">&lt; Zpět na seznam interpretů<i class="fa"></i></a><br><br>
               <h3>{$band->nazev}</h3>
             </div>
           </div>
@@ -24,7 +25,7 @@
               <p><a href="https://www.facebook.com/vypsanafixa/">https://www.facebook.com/vypsanafixa/</a></p>
               <h5>Členové:</h5><br>
               <ul class="featured-list">
-                <li>{$band->clenove}</li>
+                <li><pre>{$band->clenove}</pre></li>
               </ul>
             </div>
           </div>
@@ -35,7 +36,7 @@
           </div>
 
           {if $user->isInRole('admin') || $user->isInRole('organiser')}
-            <a n:href="Management:interpret $band->int_ID" class="filled-button">Upravit obsah</a>
+            <a n:href="Management:interpretEdit $band->int_ID" class="filled-button">Upravit obsah</a>
           {/if}
           
         </div>
