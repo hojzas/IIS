@@ -38,18 +38,34 @@ class FestivalModel
 			$thisP->error('Festival nenalezen');
 		}
 		
-		/*
-		$bandGenres = array();
-		foreach ($festival->related('tagovani') as $genres) {
-			$genre = $this->database->table('zanr')
-				->where('zan_ID', $genres->zan_id)
-				->fetch();
-			$bandGenres[] = $genre->nazev;
+		$stages = $interprets = array();
+
+		// get festival stages
+		$festStages = $this->database->table('stage')
+			->where('fes_id', $fesID);
+
+		foreach ($festStages as $festStage) {
+
+			$interprets[] = $festStage->nazev;
+
+			// get stage interprets
+			$stageInterprets = $this->database->table('vystupuje')->where('stg_id', $festStage->stg_ID);
+			foreach ($stageInterprets as $stageInterpret) {
+				
+				$interprets[] = $stageInterpret->cas->format('%H:%I');
+				$interprets[] = strval($stageInterpret->int_id);
+			}
+			$stages[] = $interprets;
+			unset($interprets); 
+
 		}
-		*/
+
+		
+		
+		
 
 		$thisP->template->festival = $festival;
-		//$thisP->template->bandGenres = $bandGenres;
+		$thisP->template->stages = $stages;
 	}
 
 }

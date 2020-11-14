@@ -7,7 +7,7 @@ namespace App\Presenters;
 use Nette;
 use Nette\Application\UI\Form;
 use App\Model\InterpretManagerModel;
-use App\Model\FesticalManagerModel;
+use App\Model\FestivalManagerModel;
 
 
 final class ManagementPresenter extends BasePresenter
@@ -16,13 +16,13 @@ final class ManagementPresenter extends BasePresenter
     /** @var InterpretManagerModel */
     private $interpretManagerModel;
 
-    /** @var FesticalManagerModel */
-    private $festicalManagerModel;
+    /** @var FestivalManagerModel */
+    private $festivalManagerModel;
     
-    public function __construct(InterpretManagerModel $interpretManagerModel, FesticalManagerModel $festicalManagerModel)
+    public function __construct(InterpretManagerModel $interpretManagerModel, FestivalManagerModel $festivalManagerModel)
     {
         $this->interpretManagerModel = $interpretManagerModel;
-        $this->festicalManagerModel = $festicalManagerModel;
+        $this->festivalManagerModel = $festivalManagerModel;
     }
 
     /**
@@ -50,6 +50,24 @@ final class ManagementPresenter extends BasePresenter
     public function renderFestivalEdit(int $festivalID): void
 	{
         $this->template->festivalID = $festivalID;
+    }
+
+    /**
+     * Get festival ID.
+	 */
+    public function renderFestivalStageInsert(int $festivalID, int $stageNumber): void
+	{
+        $this->template->festivalID = $festivalID;
+        $this->template->stageNumber = $stageNumber;
+    }
+    
+    /**
+     * Get festival ID.
+	 */
+    public function renderFestivalStageEdit(int $festivalID, int $stageID): void
+	{
+        $this->template->festivalID = $festivalID;
+        $this->template->stageID = $stageID;
     }
     
     /**
@@ -115,7 +133,7 @@ final class ManagementPresenter extends BasePresenter
      */
     protected function createComponentFestivalInsertForm(): Form
     {
-        return $this->festicalManagerModel->createFestivalInsertForm($this);
+        return $this->festivalManagerModel->createFestivalInsertForm($this);
     }
         
     /**
@@ -123,7 +141,7 @@ final class ManagementPresenter extends BasePresenter
      */
     public function insertFestival(Form $form, \stdClass $values): void
     {
-        $this->festicalManagerModel->insertFestival($this, $values, $form);
+        $this->festivalManagerModel->insertFestival($this, $values, $form);
     }
 
     /**
@@ -135,7 +153,7 @@ final class ManagementPresenter extends BasePresenter
 	 */
 	protected function createComponentFestivalEditForm(): Form
 	{
-        return $this->festicalManagerModel->createFestivalEditForm($this);
+        return $this->festivalManagerModel->createFestivalEditForm($this);
     }
         
     /**
@@ -143,21 +161,102 @@ final class ManagementPresenter extends BasePresenter
      */
     public function updateFestival(Form $form, \stdClass $values): void
     {
-        $this->festicalManagerModel->updateFestival($this, $values, $form);
+        $this->festivalManagerModel->updateFestival($this, $values, $form);
     }
 
     /**
-	 * ---------------------------------------- DELETE FESTIVAL ----------------------------------------
+	 * Festival stage form factory.
 	 */
+	protected function createComponentStageForm(): Form
+	{
+        return $this->festivalManagerModel->createStageForm($this);
+    }
 
+    /**
+	 * Festival stage form factory.
+	 */
+	protected function createComponentNewStageForm(): Form
+	{
+        return $this->festivalManagerModel->createNewStageForm($this);
+    }
+    
+    /**
+     * ---------------------------------------- DELETE FESTIVAL ----------------------------------------
+	 */
+    
     /**
      * Delete festival.
      */
     public function deleteFestival(Nette\Forms\Controls\Button $button, $data): void
 	{
         $form = $button->getForm();
+        $this->festivalManagerModel->deleteFestival($this, $form);
+    }
+    
+    /**
+     * ---------------------------------------- INSERT STAGE ----------------------------------------
+	 */
 
-        $this->festicalManagerModel->deleteFestival($this, $form);
+    public function createStage(Form $form, \stdClass $values): void
+	{
+        $this->festivalManagerModel->createStage($this, $form);
+    }
+    
+    /**
+     * Insert new festival stage form factory.
+     */
+	protected function createComponentStageInsertForm(): Form
+	{
+        return $this->festivalManagerModel->createStageInsertForm($this);
+    }
+
+    /**
+     * Insert new festival stage.
+     */
+    public function insertStage(Form $form, \stdClass $values): void
+    {
+        $this->festivalManagerModel->insertStage($this, $values, $form);
+    }    
+    
+    /**
+     * ---------------------------------------- EDIT STAGE ----------------------------------------
+	 */
+    /**
+     * Insert new festival stage.
+     */
+    public function editStage(Form $form, \stdClass $values): void
+    {
+        $this->festivalManagerModel->editStage($this, $values);
+    }
+
+    /**
+     * Edit festival stage form factory.
+     */
+	protected function createComponentStageEditForm(): Form
+	{
+        return $this->festivalManagerModel->createStageEditForm($this);
+    }
+
+    /**
+	 * Update edited festival stage.
+	 */
+    public function updateStage(Form $form, \stdClass $values): void
+    {
+        $this->festivalManagerModel->updateStage($this, $values, $form);
+    }
+
+    /**
+	 * ---------------------------------------- DELETE STAGE ----------------------------------------
+	 */
+
+    /**
+     * Delete stage.
+     */
+    public function deleteStage(Nette\Forms\Controls\Button $button, $data): void
+	{
+        $form = $button->getForm();
+
+        $this->festivalManagerModel->deleteFestival($this, $form);
     }
             
 }

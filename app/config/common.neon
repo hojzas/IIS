@@ -22,5 +22,5 @@ services:
 	- App\Model\InterpretModel
 	- App\Model\InterpretManagerModel
 	- App\Model\FestivalModel
-	- App\Model\FesticalManagerModel
+	- App\Model\FestivalManagerModel
 	- App\Model\AccountModel

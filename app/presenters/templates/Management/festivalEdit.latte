@@ -12,7 +12,7 @@
           <div class="col-md-12">
             <div class="section-heading">
               <a style="color:#f33f3f;" n:href="Festival:info $festivalID">&lt; Zpět na detail festivalu<i class="fa"></i></a><br><br>
-              <h2>Úprava kapely</h2>
+              <h2>Úprava festivalu</h2>
             </div>
           </div>
           <div class="col-md-8">
@@ -22,6 +22,30 @@
                 {control festivalEditForm}
 
               </form>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="contact-form">
+              <h5><a style="color:black;" n:href="Account:passwordchange">Stage:</a></h5><br>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <form id="contact" action="" method="post">
+                
+                  {control stageForm}
+
+
+                </form>
+              </div>
+            </div>
+            <div class="contact-form">
+              <h5><a style="color:black;" n:href="Account:passwordchange">Vytvořit novou stage:</a></h5><br>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <form id="contact" action="" method="post">
+                
+                  {control newStageForm}
+
+                </form>
+              </div>
             </div>
           </div>
 

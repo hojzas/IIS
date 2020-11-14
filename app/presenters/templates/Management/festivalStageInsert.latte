@@ -1,0 +1,31 @@
+{block title}
+  Vytvoření stage
+{/block}
+
+{block content}
+	<div class="empty-heading"></div>
+
+    <!-- Festival management -->
+    <div class="send-message">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <a style="color:#f33f3f;" n:href="Management:festivalEdit $festivalID">&lt; Zpět na úpravu festivalu<i class="fa"></i></a><br><br>
+                
+              <h2>Vytvoření stage</h2>
+            </div>
+          </div>
+          <div class="col-md-8">
+          <p>(Pro účely testování předvyplněno)</p>
+            <div class="contact-form">
+              <form id="contact" action="" method="post">
+               
+                {control stageInsertForm}
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

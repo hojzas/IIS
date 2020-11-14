@@ -103,10 +103,6 @@ class InterpretManagerModel
 			$bandID = $row->int_ID;
 
 			// insert band genres
-			$count = $this->database->table('tagovani')
-				->where('int_id', $bandID)
-				->delete();
-
 			foreach ($values->genres as $genre) {
 				$row = $this->database->table('tagovani')
 					->insert([

@@ -20,10 +20,17 @@
 			        <p>{$festival->popis}</p>
               <h5>Program:</h5><br>
 
-			        <h6>Velká Stage</h6>
-              <ul class="featured-list">
-                <li>17:00 <a href="#"><b>Interpret</b></a></li>
-              </ul>
+              {foreach $stages as $stage}
+                <h6>{$stage[0]}</h6>
+                <ul class="featured-list">
+
+                  {for $i = 1; $i < count($stage); $i++}
+                    <li>&nbsp;&nbsp;&nbsp;<a href="#">{$stage[$i], $i++}<b>{$stage[$i]}</b></a></li>
+                  {/for}
+
+                  <br>
+                </ul>
+              {/foreach}
 
             </div>
           </div>

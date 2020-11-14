@@ -136,7 +136,7 @@ CREATE TABLE `tagovani` (
 CREATE TABLE `vystupuje` (
   `stg_id` int(11) NOT NULL,
   `int_id` int(11) NOT NULL,
-  `cas` timestamp NOT NULL
+  `cas` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 --
