@@ -25,7 +25,7 @@
                 <ul class="featured-list">
 
                   {for $i = 1; $i < count($stage); $i++}
-                    <li>&nbsp;&nbsp;&nbsp;<a href="#">{$stage[$i], $i++}<b>{$stage[$i]}</b></a></li>
+                    <li>&nbsp;&nbsp;&nbsp;<a n:href="Interpret:detail $stage[$i]">{$stage[++$i]} <b>{$stage[++$i]}</b></a></li>
                   {/for}
 
                   <br>

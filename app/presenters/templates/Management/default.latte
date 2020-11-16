@@ -11,19 +11,31 @@
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-              <h2>Vytvořit nový <a style="color:#f33f3f;" n:href="Management:festivalInsert">Festival</a></h2>
+              <h4>Vytvořit nový <a style="color:#f33f3f;" n:href="Management:festivalInsert">Festival</a></h4>
             </div>
           </div>
           <div class="col-md-12">
             <div class="section-heading">
-              <h2>Vytvořit nového <a style="color:#f33f3f;" n:href="Management:interpretInsert">Interpreta</a></h2>
+              <h4>Vytvořit nového <a style="color:#f33f3f;" n:href="Management:interpretInsert">Interpreta</a></h4>
             </div>
           </div>
           <div class="col-md-12">
             <div class="section-heading">
-              <h2>Upravit existující Festival/Interpreta >> <a style="color:#f33f3f;" n:href="Festival:search">Vyhledat</a></h2>
+              <h4>Upravit existující Festival/Interpreta >> <a style="color:#f33f3f;" n:href="Festival:search">Vyhledat</a></h4>
             </div>
           </div>
+          {if $user->isInRole('admin')}
+            <div class="col-md-12">
+              <div class="section-heading">
+                <h4>Vytvořit nový <a style="color:#f33f3f;" n:href="Festival:search">Účet</a></h4>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="section-heading">
+                <h4>Upravit existující <a style="color:#f33f3f;" n:href="Festival:search">Účet</a></h4>
+              </div>
+            </div>
+          {/if}
         </div>
       </div>
     </div>

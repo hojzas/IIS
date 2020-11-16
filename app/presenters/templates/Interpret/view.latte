@@ -14,7 +14,6 @@
         </div>
       </div>
     </div>
-
     
     <div class="team-members">
       <div class="container">
@@ -44,22 +43,25 @@
           {/foreach}
 
         </div>
-      </div>
-    </div>
 	
-	<!-- Page number -->
-	<div class="products">
-      <div class="container">
-	    <div class="row">
-	      <div class="col-md-12">
-            <ul class="pages">
-              <li><a href="#">1</a></li>
-              <li class="active"><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-            </ul>
-          </div>
+        <!-- Paginating -->
+        <div class="pagination">
+          {if $page > 1}
+            <a n:href="view, 1">První</a>
+            &nbsp;|&nbsp;
+            <a n:href="view, $page - 1">Předchozí</a>
+            &nbsp;|&nbsp;
+          {/if}
+
+          Stránka {$page} z {$lastPage}
+
+          {if $page < $lastPage}
+            &nbsp;|&nbsp;
+            <a n:href="view, $page + 1">Další</a>
+            &nbsp;|&nbsp;
+            <a n:href="view, $lastPage">Poslední</a>
+          {/if}
         </div>
+
       </div>
     </div>

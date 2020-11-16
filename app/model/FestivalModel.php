@@ -20,12 +20,22 @@ class FestivalModel
     /**
 	 * Render festival detail.
 	 */
-    public function renderView($thisP, $page)
+    public function renderView($thisP)
 	{
-		$thisP->template->page = $page;
 		$thisP->template->festivals = $this->database->table('festival')
+			->where('datum > ?', new \DateTime)
 			->order('datum')
-			->limit(15);
+			->limit(6);
+	}
+
+	/**
+	 * Render festival detail.
+	 */
+    public function findFestivals(): Nette\Database\Table\Selection
+	{
+		return $this->database->table('festival')
+				->where('datum > ?', new \DateTime)
+				->order('datum');
 	}
 
 	/**
@@ -49,20 +59,22 @@ class FestivalModel
 			$interprets[] = $festStage->nazev;
 
 			// get stage interprets
-			$stageInterprets = $this->database->table('vystupuje')->where('stg_id', $festStage->stg_ID);
+			$stageInterprets = $this->database->table('vystupuje')
+				->where('stg_id', $festStage->stg_ID)
+				->order('cas');
+
 			foreach ($stageInterprets as $stageInterpret) {
 				
+				$interprets[] = $stageInterpret->int_id;
 				$interprets[] = $stageInterpret->cas->format('%H:%I');
-				$interprets[] = strval($stageInterpret->int_id);
+				$interprets[] = $this->database->table('interpret')
+					->where('int_ID', $stageInterpret->int_id)
+					->fetch()->nazev;
 			}
 			$stages[] = $interprets;
 			unset($interprets); 
 
 		}
-
-		
-		
-		
 
 		$thisP->template->festival = $festival;
 		$thisP->template->stages = $stages;

@@ -35,13 +35,15 @@ class FestivalManagerModel
 	{
 		$form = new Form;
         
-        $form->addText('name', 'Název: ')
+		$form->addText('name', 'Název: ')
+			->setDefaultValue('Festival')
             ->setRequired('Prosím zadejte název festivalu.')
 			->setHtmlAttribute('placeholder', 'Název festivalu')
 			->addRule($form::MAX_LENGTH, 'Název je příliš dlouhý', 50)
             ->setHtmlAttribute('class', 'form-control');
             
-        $form->addTextArea("description", 'Popis: ')
+		$form->addTextArea("description", 'Popis: ')
+			->setDefaultValue('Popis festivalu.')
             ->setRequired('Prosím zadejte popis festivalu.')
 			->setHtmlAttribute('placeholder', 'Popis festivalu')
 			->addRule($form::MAX_LENGTH, 'Popis je příliš dlouhý', 200)
@@ -53,25 +55,29 @@ class FestivalManagerModel
 			->setHtmlAttribute('class', 'form-control')
 			->setType('date');
 		
-        $form->addText('location', 'Lokace: ')
+		$form->addText('location', 'Lokace: ')
+			->setDefaultValue('Brno')
             ->setRequired('Prosím zadejte lokaci festivalu.')
 			->setHtmlAttribute('placeholder', 'Lokace festivalu')
 			->addRule($form::MAX_LENGTH, 'Lokalita je příliš dlouhá', 50)
 			->setHtmlAttribute('class', 'form-control');
 			
 		$form->addText('address', 'Adresa: ')
+			->setDefaultValue('Brno, Festivalová 123')
             ->setRequired('Prosím zadejte adresu festivalu.')
 			->setHtmlAttribute('placeholder', 'Adresa festivalu')
 			->addRule($form::MAX_LENGTH, 'Adresa je příliš dlouhá', 50)
 			->setHtmlAttribute('class', 'form-control');
 			
 		$form->addInteger('price', 'Cena: ')
+			->setDefaultValue(550)
             ->setRequired('Prosím zadejte cenu festivalu.')
 			->setHtmlAttribute('placeholder', 'Cena festivalu')
 			->addRule($form::RANGE, 'Cena musí být v rozsahu mezi %d a %d.', [0, 100000])
 			->setHtmlAttribute('class', 'form-control');
 			
 		$form->addInteger('capacity', 'Kapacita: ')
+			->setDefaultValue(2000)
             ->setRequired('Prosím zadejte kapacitu festivalu.')
 			->setHtmlAttribute('placeholder', 'Kapacita festivalu')
 			->addRule($form::RANGE, 'Kapacita musí být v rozsahu mezi %d a %d.', [0, 99999999999])
@@ -490,6 +496,8 @@ class FestivalManagerModel
 			//echo $schedule[$i-1]->cas->format("%H:%i");
 		}
 
+		$form->addSubmit('delete', 'Odstranit')
+			->onClick[] = [$thisP, 'deleteStage'];
 
 		$form->addSubmit('send', 'Uložit změny');
 
@@ -548,26 +556,21 @@ class FestivalManagerModel
 	 */
     public function deleteStage($thisP, $form)
 	{
-		$password = $form->getValues()->password;
+		$stageID = $thisP->getParameter('stageID');
+		$festivalID = $thisP->getParameter('festivalID');
 
-        // check passwords
-        if (!$this->checkPasswordModel->checkPassword($password, $thisP)) {
-            $form->addError('Nesprávné heslo');
-        } else {
+		// delete stage references
+		$count = $this->database->table('vystupuje')
+			->where('stg_id', $stageID)
+			->delete();
 
-            $festivalID = $thisP->getParameter('festivalID');
-
-            // delete festivals stages
-           
-
-            // delete festival
-            $count = $this->database->table('festival')
-                ->where('fes_ID', $festivalID)
-                ->delete();
-			
-            $thisP->flashMessage("Festival odstraněn.");
-            $thisP->redirect('Festival:view');
-        }
+		// delete stage
+		$count = $this->database->table('stage')
+			->where('stg_ID', $stageID)
+			->delete();
+		
+		$thisP->flashMessage("Stage odstraněna.");
+		$thisP->redirect('Management:festivalEdit', $festivalID);
 	}
 
 }

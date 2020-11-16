@@ -560,6 +560,10 @@ header .navbar {
 	padding-left: 13px;
 }
 
+.pagination a {
+	color: #f33f3f;
+}
+
 .featured-list li b {
 	font-size: 18px;
 	color: #f33f3f;

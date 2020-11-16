@@ -24,7 +24,13 @@ final class InterpretPresenter extends BasePresenter
 	 */
     public function renderView(int $page = 1): void
 	{
-		$this->interpretModel->renderView($this, $page);
+		$bands = $this->interpretModel->renderView();
+
+		// paginating
+		$lastPage = 0;
+		$this->template->bands = $bands->page($page, 9, $lastPage);
+		$this->template->page = $page;
+		$this->template->lastPage = $lastPage;
 	}
 
 	/**

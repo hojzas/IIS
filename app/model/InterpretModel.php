@@ -16,14 +16,14 @@ class InterpretModel
 	{
 		$this->database = $database;
     }
-    
-    /**
+
+	/**
 	 * Render interpret view.
 	 */
-    public function renderView($thisP, $page)
+    public function renderView(): Nette\Database\Table\Selection
 	{
-		$thisP->template->page = $page;
-		$thisP->template->bands = $this->database->table('interpret')
+		return $this->database->table('interpret')
+			->order('nazev')
 			->limit(9);
 	}
 

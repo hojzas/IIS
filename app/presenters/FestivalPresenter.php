@@ -24,7 +24,13 @@ final class FestivalPresenter extends BasePresenter
 	 */
     public function renderView(int $page = 1): void
 	{
-		$this->festivalModel->renderView($this, $page);
+		$festivals = $this->festivalModel->findFestivals();
+
+		// paginating
+		$lastPage = 0;
+		$this->template->festivals = $festivals->page($page, 9, $lastPage);
+		$this->template->page = $page;
+		$this->template->lastPage = $lastPage;
 	}
 
 	/**

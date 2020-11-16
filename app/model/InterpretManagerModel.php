@@ -45,7 +45,8 @@ class InterpretManagerModel
 			->addRule($form::MAX_LENGTH, 'Popis členů je příliš dlouhý', 200)
             ->setHtmlAttribute('class', 'form-control');
             
-        $form->addText('logo', 'Logo kapely*: ')
+		$form->addText('logo', 'Logo kapely*: ')
+			->setDefaultValue('default_band.jpeg')
             ->setRequired('Prosím zadejte název souboru loga kapely.')
             ->setHtmlAttribute('placeholder', 'Logo kapely')
             ->setHtmlAttribute('class', 'form-control');

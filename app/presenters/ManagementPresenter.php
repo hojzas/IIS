@@ -256,7 +256,7 @@ final class ManagementPresenter extends BasePresenter
 	{
         $form = $button->getForm();
 
-        $this->festivalManagerModel->deleteFestival($this, $form);
+        $this->festivalManagerModel->deleteStage($this, $form);
     }
             
 }

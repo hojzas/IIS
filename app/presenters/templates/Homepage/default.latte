@@ -38,20 +38,23 @@
               <a n:href="Festival:view">Zobrazit všechny festivaly <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="#"><img src="{$basePath}/assets/images/product_01.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="Festival:detail"><h4>Název festivalu</h4></a>
-                <h6>890 Kč</h6>
-                <p>Interpret, Interpret, Interpret, Interpret</p>
-				          <ul class="stars">
-                  <li>6. 6. 2021</li>
-                </ul>
-                <span>Lokalita</span>
+
+          {foreach $festivals as $festival}
+            <div class="col-lg-4 col-md-4 all {$festival->datum->format('Y')|noescape}">
+              <div class="product-item">
+                <a n:href="Festival:info $festival->fes_ID"><img src="{$basePath}/assets/images/product_01.jpg" alt=""></a>
+                <div class="down-content">
+                  <h4><a style="color:black;" n:href="Festival:info $festival->fes_ID">{$festival->nazev}</a></h4>
+                  <h6>{$festival->cena},- Kč</h6>
+                  <p>kapely...</p>
+                  <ul class="stars">
+                    <li>{$festival->datum->format('j.n.Y')}</li>
+                  </ul>
+                  <span>{$festival->misto}</span>
+                </div>
               </div>
             </div>
-          </div>
+          {/foreach}
           
         </div>
       </div>
