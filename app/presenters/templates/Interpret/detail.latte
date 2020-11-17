@@ -22,16 +22,16 @@
                   <a style="color:#f33f3f;" href="#">{$bandGenre}</a> |
                 {/foreach}
               </h4>
-              <p><a href="https://www.facebook.com/vypsanafixa/">https://www.facebook.com/vypsanafixa/</a></p>
+              <p><a href="{$band->facebook}">{$band->facebook}</a></p>
               <h5>Členové:</h5><br>
               <ul class="featured-list">
-                <li><pre>{$band->clenove}</pre></li>
+                <li><pre style="font-family: 'Poppins', sans-serif;">{$band->clenove}</pre></li>
               </ul>
             </div>
           </div>
           <div class="col-md-6">
             <div class="right-image">
-              <img src="{$basePath}/assets/images/default_band.jpeg" alt="">
+              <img src="{$basePath}/assets/images/{$band->logo}" alt="">
             </div>
           </div>
 
@@ -50,17 +50,19 @@
           <div class="col-md-12">
             <br><h5>Účinkují na:</h5>
 
-            <div class="inner-content">
-              <div class="row">
-                <div class="col-md-8">
-                  <h4><em><a n:href="Festival:detail">Festival</a></em>, 890 Kč</h4>
-                  <p>Zbývá 232/1000 vstupenek.</p>
-                </div>
-                <div class="col-md-4">
-                  <h4><a style="color:#f33f3f;" href="#">Lokalita</a></h4>
+            {foreach $festivals as $festival}
+              <div class="inner-content">
+                <div class="row">
+                  <div class="col-md-8">
+                    <h4><em><a n:href="Festival:info, $festival->fes_ID">{$festival->nazev}</a></em>, {$festival->cena} Kč</h4>
+                    <p>Zbývá {$festival->kapacita - $festival->prodane}/{$festival->kapacita} vstupenek.</p>
+                  </div>
+                  <div class="col-md-4">
+                    <h4><a style="color:#f33f3f;" href="#">{$festival->misto}</a></h4>
+                  </div>
                 </div>
               </div>
-            </div>
+            {/foreach}
 
           </div>
         </div>

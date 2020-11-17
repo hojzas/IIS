@@ -56,10 +56,10 @@
               <div class="row">
                 <div class="col-md-8">
                   <h4>Cena vstupenky: <em>{$festival->cena},- Kč</em></h4>
-                  <p>Dostupné vstupenky: 232/{$festival->kapacita}.</p>
+                  <p>Dostupné vstupenky: {$festival->kapacita - $festival->prodane}/{$festival->kapacita}.</p>
                 </div>
                 <div class="col-md-4">
-                  <a n:href="Festival:book" class="filled-button">Zarezervovat</a>
+                  <a n:href="Festival:book $festival->fes_ID" class="filled-button">Zarezervovat</a>
                 </div>
               </div>
             </div>

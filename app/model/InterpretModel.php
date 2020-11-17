@@ -37,16 +37,24 @@ class InterpretModel
 			$thisP->error('Interpret nenalezen');
 		}
 		
+		// bands genres
 		$bandGenres = array();
 		foreach ($band->related('tagovani') as $genres) {
 			$genre = $this->database->table('zanr')
 				->where('zan_ID', $genres->zan_id)
 				->fetch();
-			$bandGenres[] = $genre->nazev;
-		}
+				$bandGenres[] = $genre->nazev;
+			}
+			
+		// bands festivals
+		$festivals = array();
+		$festivals = $this->database->table('festival');
+		$festivals->where(':stage:vystupuje.int_id.int_ID', $intID)
+			->group('festival.fes_ID');
 
 		$thisP->template->band = $band;
 		$thisP->template->bandGenres = $bandGenres;
+		$thisP->template->festivals = $festivals;
 	}
 
 }

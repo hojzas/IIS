@@ -34,8 +34,8 @@ class FestivalModel
     public function findFestivals(): Nette\Database\Table\Selection
 	{
 		return $this->database->table('festival')
-				->where('datum > ?', new \DateTime)
-				->order('datum');
+			->where('datum > ?', new \DateTime)
+			->order('datum');
 	}
 
 	/**
@@ -73,7 +73,6 @@ class FestivalModel
 			}
 			$stages[] = $interprets;
 			unset($interprets); 
-
 		}
 
 		$thisP->template->festival = $festival;

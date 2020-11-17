@@ -114,7 +114,8 @@ class FestivalManagerModel
 				'misto' => $values->location,
 				'adresa' => $values->address,
 				'cena' => $values->price,
-				'kapacita' => $values->capacity
+				'kapacita' => $values->capacity,
+				'prodane' => 0
 			]);
 
 			if (!$row) {

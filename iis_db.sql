@@ -61,7 +61,8 @@ CREATE TABLE `festival` (
   `misto` varchar(50) COLLATE utf8_czech_ci NOT NULL,
   `adresa` varchar(50) COLLATE utf8_czech_ci NOT NULL,
   `cena` float NOT NULL,
-  `kapacita` int(11) NOT NULL
+  `kapacita` int(11) NOT NULL,
+  `prodane` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 -- --------------------------------------------------------
@@ -74,7 +75,8 @@ CREATE TABLE `interpret` (
   `int_ID` int(11) NOT NULL,
   `nazev` varchar(50) COLLATE utf8_czech_ci NOT NULL,
   `logo` varchar(100) COLLATE utf8_czech_ci NOT NULL,
-  `clenove` varchar(200) COLLATE utf8_czech_ci NOT NULL
+  `clenove` varchar(200) COLLATE utf8_czech_ci NOT NULL,
+  `facebook` varchar(255) COLLATE utf8_czech_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 -- --------------------------------------------------------
@@ -85,10 +87,9 @@ CREATE TABLE `interpret` (
 
 CREATE TABLE `rezervace` (
   `rez_ID` int(11) NOT NULL,
-  `stav` tinyint(1) NOT NULL,
   `pocet_vstupenek` int(11) NOT NULL,
-  `uhrazeno` tinyint(1) NOT NULL,
-  `cas` timestamp NOT NULL,
+  `uhrazeno` tinyint(1) NOT NULL DEFAULT 0,
+  `cas` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `div_id` int(11) NOT NULL,
   `fes_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
@@ -281,6 +282,15 @@ ALTER TABLE `vystupuje`
   ADD CONSTRAINT `FK_stg_vyst` FOREIGN KEY (`stg_id`) REFERENCES `stage` (`stg_ID`);
 
 --
+-- Trigger 'reduce_capacity'
+--
+CREATE TRIGGER reduce_capacity AFTER INSERT ON rezervace
+FOR EACH ROW UPDATE festival 
+	SET prodane = prodane + NEW.pocet_vstupenek 
+	WHERE fes_ID = NEW.fes_id;
+
+
+--
 -- Insert `zanr`
 --
 INSERT INTO zanr (nazev)
@@ -310,7 +320,8 @@ VALUES
 	('admin'),
     ('organiser'),
     ('accountant'),
-    ('user');
+    ('user'),
+    ('unregistered');
 	
 --
 -- Insert `admin`, password: '123'

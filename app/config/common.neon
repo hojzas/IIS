@@ -24,3 +24,4 @@ services:
 	- App\Model\FestivalModel
 	- App\Model\FestivalManagerModel
 	- App\Model\AccountModel
+	- App\Model\BookingModel

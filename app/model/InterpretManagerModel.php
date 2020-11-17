@@ -39,7 +39,11 @@ class InterpretManagerModel
 			->addRule($form::MAX_LENGTH, 'Název je příliš dlouhý', 50)
             ->setHtmlAttribute('class', 'form-control');
             
-        $form->addTextArea("members", 'Členové: ')
+		$form->addTextArea("members", 'Členové: ')
+			->setDefaultValue("
+Člen1 - zpěv, kytara
+Člen2 - bicí
+Člen3 - baskytara")
             ->setRequired('Prosím zadejte člena kapely.')
 			->setHtmlAttribute('placeholder', 'Členové kapely')
 			->addRule($form::MAX_LENGTH, 'Popis členů je příliš dlouhý', 200)
@@ -49,6 +53,10 @@ class InterpretManagerModel
 			->setDefaultValue('default_band.jpeg')
             ->setRequired('Prosím zadejte název souboru loga kapely.')
             ->setHtmlAttribute('placeholder', 'Logo kapely')
+			->setHtmlAttribute('class', 'form-control');
+			
+		$form->addText('facebook', '()Facebook kapely: ')
+            ->setHtmlAttribute('placeholder', 'Facebook kapely')
             ->setHtmlAttribute('class', 'form-control');
 
         $allGenres = array();
@@ -93,6 +101,7 @@ class InterpretManagerModel
 			->insert([
 				'nazev' => $values->name,
 				'logo' => $values->logo,
+				'facebook' => $values->facebook,
 				'clenove' => $values->members
 			]);
 
@@ -159,6 +168,11 @@ class InterpretManagerModel
 			->setHtmlAttribute('placeholder', 'Logo kapely')
 			->setHtmlAttribute('class', 'form-control');
 
+		$form->addText('facebook', '()Facebook kapely: ')
+			->setDefaultValue($band->facebook)
+            ->setHtmlAttribute('placeholder', 'Facebook kapely')
+            ->setHtmlAttribute('class', 'form-control');
+
 		$allGenres = $bandGenres = array();
 			
 		// select all genres
@@ -216,6 +230,7 @@ class InterpretManagerModel
 				->update([
 					'nazev' => $values->name,
 					'logo' => $values->logo,
+					'facebook' => $values->facebook,
 					'clenove' => $values->members,
 				]);
 			

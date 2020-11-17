@@ -21,6 +21,16 @@ final class RegistrationPresenter extends BasePresenter
     }
 
     /**
+     * Get details for registration
+	 */
+    public function renderComplete($phone, $email, $id): void
+	{
+		$this->template->phone = $phone;
+		$this->template->email = $email;
+		$this->template->id = $id;
+    }
+
+    /**
 	 * Registration form factory.
 	 */
 	protected function createComponentRegistrationForm(): Form
@@ -34,6 +44,22 @@ final class RegistrationPresenter extends BasePresenter
     public function registrateUser(Form $form, \stdClass $values): void
 	{
         $this->accountModel->registrateUser($this, $values, $form);
+    }
+
+    /**
+	 * Complete registration form factory.
+	 */
+	protected function createComponentCompleteRegistrationForm(): Form
+	{
+        return $this->accountModel->completeRegistrationForm($this);
+    }
+
+    /**
+	 * Complete registration.
+	 */
+    public function completeRegistration(Form $form, \stdClass $values): void
+	{
+        $this->accountModel->completeRegistration($this, $values, $form);
     }
 
 }

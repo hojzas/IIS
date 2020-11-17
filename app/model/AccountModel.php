@@ -120,6 +120,107 @@ class AccountModel
 			$form->addError('Zadaná hesla se neshodují!');
 		}
 	}
+
+	/**
+	 * Complete registration form factory.
+	 */
+	public function completeRegistrationForm($thisP)
+	{
+		$phone = $thisP->getParameter('phone');
+		$email = $thisP->getParameter('email');
+
+		$form = new Form;
+		
+		$form->addText('firstname', 'Jméno: ')
+			->setDefaultValue('Leo')
+			->setRequired('Prosím zadejte Vaše jméno.')
+			->setHtmlAttribute('placeholder', 'Jméno')
+			->addRule($form::MAX_LENGTH, 'Jméno je příliš dlouhé', 20)
+			->setHtmlAttribute('class', 'form-control');
+		
+		$form->addText('surname', 'Příjmení: ')
+			->setDefaultValue('Messi')
+			->setRequired('Prosím zadejte Vaše příjmení.')
+			->setHtmlAttribute('placeholder', 'Příjmení')
+			->addRule($form::MAX_LENGTH, 'Příjmení je příliš dlouhé', 20)
+			->setHtmlAttribute('class', 'form-control');
+
+		$form->addEmail('email', 'E-Mail: ')
+			->setDefaultValue($email)
+			->setRequired('Prosím zadejte Váš email.')
+			->setHtmlAttribute('placeholder', 'E-Mail')
+			->addRule($form::MAX_LENGTH, 'Email je příliš dlouhý', 255)
+			->setHtmlAttribute('class', 'form-control');
+			
+		$form->addText('phone', 'Telefon*: ')
+			->setDefaultValue($phone)
+			->setRequired('Prosím zadejte Vaše telefoní číslo.')
+			->setHtmlAttribute('placeholder', 'Telefon')
+			->setHtmlAttribute('class', 'form-control')
+			->addRule($form::PATTERN, 'špatný formát', '[0-9]{9}')
+			->setHtmlType('tel');
+
+		$form->addPassword('password', 'Heslo:')
+			->setRequired('Prosím zadejte Vaše heslo.')
+			->setHtmlAttribute('placeholder', 'Heslo')
+			->addRule($form::MAX_LENGTH, 'Heslo je příliš dlouhé', 255)
+			->setHtmlAttribute('class', 'form-control');
+			
+		$form->addPassword('passwordCheck', 'Heslo znovu:')
+			->setRequired('Prosím zadejte Vaše nové heslo znovu.')
+			->setHtmlAttribute('placeholder', 'Nové heslo znovu')
+			->setHtmlAttribute('class', 'form-control');
+
+		$form->addSubmit('send', 'Zaregistrovat');
+
+		// call method completeRegistration() on success
+		$form->onSuccess[] = [$thisP, 'completeRegistration'];
+		return $form;
+	}
+
+	/**
+	 * Complete registration.
+	 */
+	public function completeRegistration($thisP, $values, $form)
+	{
+		$id = $thisP->getParameter('id');
+
+		// check passwords
+		if (strcmp($values->password, $values->passwordCheck) == 0) {
+			
+			// prepare
+			$hashedPassword = sha1($values->password);
+			$roleID = $this->database->table('role')
+				->where('nazev', 'user')
+				->fetch();
+				
+			if (!$roleID) {
+				$thisP->error('Registrace se nezdařila');
+			}
+
+			// insert
+			$row = $this->database->table('divak')
+				->where('div_ID', $id)
+				->update([
+					'jmeno' => $values->firstname,
+					'prijmeni' => $values->surname,
+					'telefon' => $values->phone,
+					'email' => $values->email,
+					'heslo' => $hashedPassword,
+					'rol_ID' => $roleID
+				]);
+
+			if (!$row) {
+				$thisP->error('Registrace se nezdařila');
+			}
+			
+			$thisP->flashMessage('Registrace proběhla úspěšně, můžete se přihlásit.');
+			$thisP->redirect('Sign:in');
+			
+		} else {
+			$form->addError('Zadaná hesla se neshodují!');
+		}
+	}
 	
 	/**
 	 * ---------------------------------------- SIGN IN ----------------------------------------
