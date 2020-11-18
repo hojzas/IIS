@@ -428,4 +428,41 @@ class AccountModel
 		$thisP->flashMessage('Odhlášení proběhlo úspěšně.');
 		$thisP->redirect('Homepage:');
 	}
+
+	/**
+	 * ---------------------------------------- MY RESERVATION ----------------------------------------
+	 */
+
+	 /**
+	 * Render interpret detail.
+	 */
+    public function renderMyReservation($thisP)
+	{
+		$userID = $thisP->user->getId();
+
+		// get reservations
+		$reservations = array();
+		$reservations = $this->database->table('rezervace')
+			->where('div_id', $userID);
+		
+		
+		$festivals = array();
+		foreach ($reservations as $reservation) {
+			$festivalsDB = $this->database->table('festival')
+				->where(':rezervace.rez_id', $reservation->rez_ID);
+
+			foreach ($festivalsDB as $festivalDB) {
+				$festivals[] = $festivalDB->fes_ID;
+				$festivals[] = $festivalDB->nazev;
+				$festivals[] = $festivalDB->datum->format('j.n.Y');
+				$festivals[] = $festivalDB->cena;
+				$festivals[] = $festivalDB->misto;
+			}
+
+			//$festivals[] = date( "Y-m-d", strtotime( "$reservation->cas + 10 day" ) );
+		}
+
+		$thisP->template->reservations = $reservations;
+		$thisP->template->festivals = $festivals;
+	}
 }

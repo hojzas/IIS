@@ -604,15 +604,15 @@ header .navbar {
 /* Call To Action */
 
 .call-to-action .inner-content {
-	margin-top: 60px;
+	margin-top: 20px;
 	padding: 30px;
 	background-color: #f7f7f7;
 	border-radius: 5px;
 }
 
-.call-to-action .inner-content h4 {
+.call-to-action .inner-content h4{
 	font-size: 17px;
-	color: #1a6692;
+	color: #000000;
 	margin-bottom: 15px;
 }
 

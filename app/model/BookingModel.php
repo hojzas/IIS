@@ -35,6 +35,8 @@ class BookingModel
 	 */
 	public function createBookForm($thisP)
 	{
+		$festivalID = $thisP->getParameter('festivalID');
+
 		$form = new Form;
 
 		if (!$thisP->user->isLoggedIn()) {
@@ -55,7 +57,17 @@ class BookingModel
 				->setHtmlType('tel');
 		}
 
-		for ($i = 1; $i <= 10; $i++) {
+		// check capacity
+		$festival = $this->database->table('festival')
+			->where('fes_ID', $festivalID)
+			->fetch();
+
+		$available = $festival->kapacita - $festival->prodane;
+		$maxAmount = 10;
+
+		if ($available < 10) $maxAmount = $available;
+
+		for ($i = 1; $i <= $maxAmount; $i++) {
 			$numbers[] = $i;
 		}
 			

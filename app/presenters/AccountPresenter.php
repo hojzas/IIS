@@ -68,5 +68,13 @@ final class AccountPresenter extends BasePresenter
 	public function actionOut(): void
 	{
         $this->accountModel->logOut($this);
+    }
+    
+    /**
+	 * Render my reservation.
+	 */
+	public function renderMyReservation(): void
+	{
+		$this->accountModel->renderMyReservation($this);
 	}
 }

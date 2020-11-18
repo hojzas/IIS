@@ -17,6 +17,7 @@
           <div class="col-md-6">
             <div class="left-content">
               <h4><a style="color:#f33f3f;" href="#">{$festival->misto}</a></h4>
+			        <p>{$festival->adresa}</p>
 			        <p>{$festival->popis}</p>
               <h5>Program:</h5><br>
 
@@ -55,12 +56,18 @@
             <div class="inner-content">
               <div class="row">
                 <div class="col-md-8">
-                  <h4>Cena vstupenky: <em>{$festival->cena},- Kč</em></h4>
-                  <p>Dostupné vstupenky: {$festival->kapacita - $festival->prodane}/{$festival->kapacita}.</p>
-                </div>
-                <div class="col-md-4">
-                  <a n:href="Festival:book $festival->fes_ID" class="filled-button">Zarezervovat</a>
-                </div>
+
+                  {if ($festival->kapacita == $festival->prodane)}
+                      <h4><em>Vyprodáno!</em></h4>
+                    </div>
+                  {else}
+                      <h4>Cena vstupenky: <em>{$festival->cena},- Kč</em></h4>
+                      <p>Dostupné vstupenky: {$festival->kapacita - $festival->prodane}/{$festival->kapacita}.</p>
+                    </div>
+                    <div class="col-md-4">
+                      <a n:href="Festival:book $festival->fes_ID" class="filled-button">Zarezervovat</a>
+                    </div>
+                  {/if}
               </div>
             </div>
           </div>

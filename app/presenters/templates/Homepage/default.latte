@@ -45,7 +45,13 @@
                 <a n:href="Festival:info $festival->fes_ID"><img src="{$basePath}/assets/images/product_01.jpg" alt=""></a>
                 <div class="down-content">
                   <h4><a style="color:black;" n:href="Festival:info $festival->fes_ID">{$festival->nazev}</a></h4>
-                  <h6>{$festival->cena},- Kč</h6>
+                  
+                  {if ($festival->kapacita == $festival->prodane)}
+                    <h6 style="color:#f33f3f;">Vyprodáno!</h6>
+                  {else}
+                    <h6>{$festival->cena},- Kč</h6>
+                  {/if}
+
                   <p>kapely...</p>
                   <ul class="stars">
                     <li>{$festival->datum->format('j.n.Y')}</li>

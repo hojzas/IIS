@@ -1,0 +1,50 @@
+{block title}
+  Můj účet
+{/block}
+
+{block content}
+	<div class="empty-heading"></div>
+    <div class="send-message">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Moje rezervace</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="call-to-action">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+
+          {var $i = 0}
+          {foreach $reservations as $reservation}
+            <div class="inner-content">
+              <div class="row">
+                <div class="col-md-8">
+                  <h4><em><a style="color:#f33f3f;" n:href="Festival:info, $festivals[$i++]">{$festivals[$i++]}</a></em>, {$festivals[$i++]}, {$festivals[$i++]},- Kč</h4>
+                  <p>počet vstupenek: <b>{$reservation->pocet_vstupenek}</b></p>
+                  <p>
+                    {if ($reservation->uhrazeno == 0)}
+                      <b>Neuhrazeno</b>, prosím zaplaťte dle instrukcí v emailu. Na uhrazení máte 10 dní od rezervace, tedy do <b>{date( 'j.n.Y', strtotime( "$reservation->cas + 10 day" ))}.</b>
+                    {else}
+                      <b>Uhrazeno</b>.
+                    {/if}
+                  </p>
+                </div>
+                <div class="col-md-4">
+                  <h4><a style="color:#f33f3f;" href="#">{$festivals[$i++]}</a></h4>
+                </div>
+              </div>
+            </div>
+          {/foreach}
+
+        </div>
+      </div>
+    </div>
+  </div>

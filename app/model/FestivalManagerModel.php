@@ -194,11 +194,14 @@ class FestivalManagerModel
 			->addRule($form::RANGE, 'Cena musí být v rozsahu mezi %d a %d.', [0, 100000])
 			->setHtmlAttribute('class', 'form-control');
 			
+		// check minimal amount, it's in reservation
+		$minAmount = $festival->prodane;
+		
 		$form->addInteger('capacity', 'Kapacita: ')
 			->setDefaultValue($festival->kapacita)
             ->setRequired('Prosím zadejte kapacitu festivalu.')
 			->setHtmlAttribute('placeholder', 'Kapacita festivalu')
-			->addRule($form::RANGE, 'Kapacita musí být v rozsahu mezi %d a %d.', [0, 99999999999])
+			->addRule($form::RANGE, 'Kapacita musí být v rozsahu mezi %d a %d.', [$minAmount, 99999999999])
 			->setHtmlAttribute('class', 'form-control');
             
         $form->addPassword('password', 'Heslo pro potvrzení:')

@@ -50,11 +50,22 @@
           <div class="col-md-12">
             <br><h5>Účinkují na:</h5>
 
+            {if (count($festivals) < 1)}
+              <p>Momentálně na žádném festivalu.</p>
+            {/if}
+
             {foreach $festivals as $festival}
               <div class="inner-content">
                 <div class="row">
                   <div class="col-md-8">
-                    <h4><em><a n:href="Festival:info, $festival->fes_ID">{$festival->nazev}</a></em>, {$festival->cena} Kč</h4>
+                    <h4>
+                      <em><a n:href="Festival:info, $festival->fes_ID">{$festival->nazev}</a></em>, {$festival->datum->format('j.n.Y')}, 
+                      {if ($festival->kapacita == $festival->prodane)}
+                        Vyprodáno!
+                      {else}
+                        {$festival->cena} Kč
+                      {/if}
+                    </h4>
                     <p>Zbývá {$festival->kapacita - $festival->prodane}/{$festival->kapacita} vstupenek.</p>
                   </div>
                   <div class="col-md-4">
