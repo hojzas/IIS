@@ -1,7 +1,12 @@
 
 div.flash {
-	color: black;
-	background: #f33f3f;
+	color: #eee;
+	background: #232323;
+}
+
+div.alert-error {
+	color: rgb(0, 0, 0);
+	background: #f86349;
 }
 
 form .error {

@@ -27,6 +27,25 @@ class BookingModel
 			$thisP->error('Festival nenalezen');
 		}
 
+		// check parallel reservated festivals
+		$userID = $thisP->user->getId();
+
+		$reservations = $this->database->table('rezervace')
+			->where('div_id', $userID);
+
+		foreach ($reservations as $reservation) {
+			$parallelFestival = $this->database->table('festival')
+				->where(':rezervace.rez_id', $reservation->rez_ID)
+				->where('datum', $festival->datum)
+				->fetch();
+
+			if ($parallelFestival) {
+				$date = $parallelFestival->datum->format('j.n.Y');
+				$thisP->flashMessage("Pozor! V den konání tohoto festivalu ($date) již máte rezervaci na $parallelFestival->nazev.", 'alert-error');
+				break;
+			}
+		}
+
 		$thisP->template->festival = $festival;
 	}
 	
@@ -143,8 +162,7 @@ class BookingModel
 			}
 
 			$thisP->flashMessage('Rezervace proběhla úspěšně, podrobné informace Vám zašleme na email.');
-			// TODO: redirect my reservation/detail
-			$thisP->redirect('Homepage:');
+			$thisP->redirect('Account:myReservation');
 		}
 		
 	}

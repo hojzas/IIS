@@ -1,0 +1,169 @@
+{block title}
+	Vyhledávání
+{/block}
+
+{block content}
+	<div class="empty-heading"></div>
+    
+  <div class="products">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+        
+          <!-- Search -->
+          <form class="search-bar" action="#">
+            {control searchForm}
+          </form>
+
+
+          <!-- Filter -->
+          <div class="filters">
+            <ul>
+              <li>
+              {if $all}
+                <a style="color:f33f3f;" n:href="default, $q, 'all', $page">
+              {else}
+                <a style="color:black;" n:href="default, $q, 'all', $page">
+              {/if}Vše</a></li>
+
+              <li>
+              {if $byFestival}
+                <a style="color:f33f3f;" n:href="default, $q, 'festivals', $page">
+              {else}
+                <a style="color:black;" n:href="default, $q, 'festivals', $page">
+              {/if}Festivaly</a></li>
+
+              <li>
+              {if $byInterpret}
+                <a style="color:f33f3f;" n:href="default, $q, 'interprets', $page">
+              {else}
+                <a style="color:black;" n:href="default, $q, 'interprets', $page">
+              {/if}Interpreti</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="filters-content">
+
+            {if $byFestival}
+              {control checkBoxForm}
+            {/if}              
+
+            <!-- Festivals -->
+            {if !$byInterpret}
+              <h2>Festivaly:</h2><br>
+
+              {if (sizeof($festivals) == 0)} 
+                <p>Žádný festival nenalezen.</p><br>
+              {/if}
+
+              <div class="row grid">
+
+                {foreach $festivals as $festival}
+                  <div class="col-lg-4 col-md-4 all festival">
+                    <div class="product-item">
+                      <a n:href="Festival:info $festival->fes_ID"><img src="{$basePath}/assets/images/product_01.jpg" alt=""></a>
+                      <div class="down-content">
+                        <h4><a style="color:black;" n:href="Festival:info $festival->fes_ID">{$festival->nazev}</a></h4>
+
+                        {if ($festival->kapacita == $festival->prodane)}
+                          <h6 style="color:#f33f3f;">Vyprodáno!</h6>
+                        {else}
+                          <h6>{$festival->cena},- Kč</h6>
+                        {/if}
+
+                        <p>{$festival->popis}</p>
+                        <ul class="stars">
+                          <li>{$festival->datum->format('j.n.Y')}</li>
+                        </ul>
+                        <span><a style="color:#f33f3f;" n:href="Search:, $festival->misto">{$festival->misto}</a></span>
+                      </div>
+                    </div>
+                  </div>
+                {/foreach}
+
+              </div>
+
+              {if $byFestival}
+                <!-- Paginating -->
+                <div class="pagination">
+                  {if $pageFest > 1}
+                    <a n:href="default, $q, 'festivals', 1, $tookPlace">První</a>
+                    &nbsp;|&nbsp;
+                    <a n:href="default, $q, 'festivals', $pageFest - 1, $tookPlace">Předchozí</a>
+                    &nbsp;|&nbsp;
+                  {/if}
+
+                  Stránka {$pageFest} z {$lastPageFest}
+
+                  {if $pageFest < $lastPageFest}
+                    &nbsp;|&nbsp;
+                    <a n:href="default, $q, 'festivals', $pageFest + 1, $tookPlace">Další</a>
+                    &nbsp;|&nbsp;
+                    <a n:href="default, $q, 'festivals', $lastPageFest, $tookPlace">Poslední</a>
+                  {/if}
+                </div>
+              {/if}
+
+            {/if}
+
+            {if (!$byFestival && !$byInterpret)}
+              <h6 style="border-top: solid grey 1px;"></h6><br>
+            {/if}
+
+            <!-- Interprets -->
+            {if !$byFestival}
+              <h2>Interpreti:</h2><br>
+
+              {if (sizeof($interprets) == 0)} 
+                <p>Žádný interpret nenalezen.</p>
+              {/if}
+
+              <div class="row grid">
+
+                {foreach $interprets as $interpret}
+                  <div class="col-lg-4 col-md-4 all festival">
+                    <div class="product-item">
+                      <a n:href="Interpret:detail $interpret->int_ID"><img src="{$basePath}/assets/images/{$interpret->logo}" alt=""></a>
+                      <div class="down-content">
+                        <h4><a style="color:black;" n:href="Interpret:detail $interpret->int_ID">{$interpret->nazev}</a></h4>
+                        <p>{$interpret->clenove}</p>
+                        <ul class="stars">
+                          <li></li>
+                        </ul>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                {/foreach}
+
+              </div>
+
+              {if $byInterpret}
+                <!-- Paginating -->
+                <div class="pagination">
+                  {if $page > 1}
+                    <a n:href="default, $q, 'festivals', 1, $tookPlace">První</a>
+                    &nbsp;|&nbsp;
+                    <a n:href="default, $q, 'festivals', $page - 1, $tookPlace">Předchozí</a>
+                    &nbsp;|&nbsp;
+                  {/if}
+
+                  Stránka {$page} z {$lastPage}
+
+                  {if $page < $lastPage}
+                    &nbsp;|&nbsp;
+                    <a n:href="default, $q, 'festivals', $page + 1, $tookPlace">Další</a>
+                    &nbsp;|&nbsp;
+                    <a n:href="default, $q, 'festivals', $lastPage, $tookPlace">Poslední</a>
+                  {/if}
+                </div>
+              {/if}
+
+            {/if}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

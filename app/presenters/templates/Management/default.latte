@@ -9,33 +9,35 @@
     <div class="send-message">
       <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            <div class="section-heading">
-              <h4>Vytvořit nový <a style="color:#f33f3f;" n:href="Management:festivalInsert">Festival</a></h4>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="section-heading">
-              <h4>Vytvořit nového <a style="color:#f33f3f;" n:href="Management:interpretInsert">Interpreta</a></h4>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="section-heading">
-              <h4>Upravit existující Festival/Interpreta >> <a style="color:#f33f3f;" n:href="Festival:search">Vyhledat</a></h4>
-            </div>
-          </div>
-          {if $user->isInRole('admin')}
+          {if $user->isInRole('admin') || $user->isInRole('organiser')}
             <div class="col-md-12">
               <div class="section-heading">
-                <h4>Vytvořit nový <a style="color:#f33f3f;" n:href="Festival:search">Účet</a></h4>
+                <h5>Vytvořit nový <a style="color:#f33f3f;" n:href="Management:festivalInsert">Festival</a></h5>
               </div>
             </div>
             <div class="col-md-12">
               <div class="section-heading">
-                <h4>Upravit existující <a style="color:#f33f3f;" n:href="Festival:search">Účet</a></h4>
+                <h5>Vytvořit nového <a style="color:#f33f3f;" n:href="Management:interpretInsert">Interpreta</a></h5>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="section-heading">
+                <h5>Upravit existující Festival/Interpreta >> <a style="color:#f33f3f;" n:href="Search:">Vyhledat</a></h5>
               </div>
             </div>
           {/if}
+          {if $user->isInRole('admin')}
+            <div class="col-md-12">
+              <div class="section-heading">
+                <h5>Správa <a style="color:#f33f3f;" n:href="Management:account">Účtů</a></h5>
+              </div>
+            </div>
+          {/if}
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h5>Správa <a style="color:#f33f3f;" n:href="Management:reservation">Rezervací</a></h5>
+            </div>
+          </div>
         </div>
       </div>
     </div>

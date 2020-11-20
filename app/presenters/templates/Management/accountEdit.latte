@@ -1,0 +1,28 @@
+{block title}
+  Úprava účtu
+{/block}
+
+{block content}
+	<div class="empty-heading"></div>
+    <div class="send-message">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <a style="color:#f33f3f;" n:href="Management:account">&lt; Zpět na správu účtů<i class="fa"></i></a><br><br>
+              <h2>Úprava účtu</h2>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="contact-form">
+              <form id="contact" action="" method="post">
+                <p>Všechny údaje jsou povinné</p>
+               
+                {control accountEditForm}
+                <p>*Formát: bez předvolby, např.: 123456789</p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

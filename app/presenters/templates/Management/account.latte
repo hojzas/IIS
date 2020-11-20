@@ -1,0 +1,57 @@
+{block title}
+  Správa účtů
+{/block}
+
+{block content}
+	<div class="empty-heading"></div>
+    <div class="send-message">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Vyhledat účet podle:</h2>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="contact-form">
+              <form id="contact" action="" method="post">
+
+                {control accountSearchForm}
+
+                <p>*Formát: bez předvolby, např.: 123456789</p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="call-to-action">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+
+          {if isset($accounts)}
+            {foreach $accounts as $account}
+              <div class="inner-content">
+                <div class="row">
+                  <div class="col-md-8">
+                    <h4><em>{$account->jmeno} {$account->prijmeni}</em>, {$account->email}</h4>
+                    <p><b>{$account->telefon}</b></p>
+                  </div>
+                  <div class="col-md-4">
+                    <a n:href="Management:accountEdit $account->div_ID" class="filled-button">Upravit</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    {if ($account->rol_id != 1)}
+                      <a n:href="deleteAccount! $account->div_ID" class="filled-button">Smazat</a>
+                    {/if}
+                  </div>
+                </div>
+              </div>
+            {/foreach}
+          {/if}
+          
+        </div>
+      </div>
+    </div>
+  </div>

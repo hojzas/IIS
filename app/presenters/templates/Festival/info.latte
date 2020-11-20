@@ -16,7 +16,7 @@
           </div>
           <div class="col-md-6">
             <div class="left-content">
-              <h4><a style="color:#f33f3f;" href="#">{$festival->misto}</a></h4>
+              <h4><a style="color:#f33f3f;" n:href="Search:, $festival->misto">{$festival->misto}</a></h4>
 			        <p>{$festival->adresa}</p>
 			        <p>{$festival->popis}</p>
               <h5>Program:</h5><br>
@@ -65,7 +65,11 @@
                       <p>Dostupné vstupenky: {$festival->kapacita - $festival->prodane}/{$festival->kapacita}.</p>
                     </div>
                     <div class="col-md-4">
-                      <a n:href="Festival:book $festival->fes_ID" class="filled-button">Zarezervovat</a>
+                      {if ($festival->datum > new \DateTime)}
+                        <a n:href="Festival:book $festival->fes_ID" class="filled-button">Zarezervovat</a>
+                      {else}
+                        Festival se již konal.
+                      {/if}
                     </div>
                   {/if}
               </div>

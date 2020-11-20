@@ -34,7 +34,7 @@ h1,h2,h3,h4,h5,h6 {
 
 form.search-bar-header input {
 	float: center;
-	width: 70%;
+	width: 100%;
 	background: #232323;
 	color: white;
 	border: none;
@@ -43,9 +43,10 @@ form.search-bar-header input {
 form.search-bar input {
 	float: center;
 	font-size: 30px;
-	width: 100%;
-	color: black;
+	width: 120%;
+	color: #232323;
 	border: none;
+	border-left: solid #f33f3f 1px;
 	padding: 20px;
 }
 

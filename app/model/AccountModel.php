@@ -446,6 +446,7 @@ class AccountModel
 			->where('div_id', $userID);
 		
 		
+		// get festival info
 		$festivals = array();
 		foreach ($reservations as $reservation) {
 			$festivalsDB = $this->database->table('festival')
@@ -457,9 +458,8 @@ class AccountModel
 				$festivals[] = $festivalDB->datum->format('j.n.Y');
 				$festivals[] = $festivalDB->cena;
 				$festivals[] = $festivalDB->misto;
+				$festivals[] = $festivalDB->adresa;
 			}
-
-			//$festivals[] = date( "Y-m-d", strtotime( "$reservation->cas + 10 day" ) );
 		}
 
 		$thisP->template->reservations = $reservations;

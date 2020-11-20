@@ -8,6 +8,8 @@ use Nette;
 use Nette\Application\UI\Form;
 use App\Model\InterpretManagerModel;
 use App\Model\FestivalManagerModel;
+use App\Model\ReservationManagerModel;
+use App\Model\AccountManagerModel;
 
 
 final class ManagementPresenter extends BasePresenter
@@ -18,11 +20,19 @@ final class ManagementPresenter extends BasePresenter
 
     /** @var FestivalManagerModel */
     private $festivalManagerModel;
+
+    /** @var ReservationManagerModel */
+    private $reservationManagerModel;
+
+    /** @var AccountManagerModel */
+    private $accountManagerModel;
     
-    public function __construct(InterpretManagerModel $interpretManagerModel, FestivalManagerModel $festivalManagerModel)
+    public function __construct(InterpretManagerModel $interpretManagerModel, FestivalManagerModel $festivalManagerModel, ReservationManagerModel $reservationManagerModel, AccountManagerModel $accountManagerModel)
     {
         $this->interpretManagerModel = $interpretManagerModel;
         $this->festivalManagerModel = $festivalManagerModel;
+        $this->reservationManagerModel = $reservationManagerModel;
+        $this->accountManagerModel = $accountManagerModel;
     }
 
     /**
@@ -31,7 +41,7 @@ final class ManagementPresenter extends BasePresenter
     protected function startup()
     {
         parent::startup();
-        if (!$this->getUser()->isLoggedIn() || (!$this->getUser()->isInRole('admin') && !$this->getUser()->isInRole('organiser'))) {
+        if (!$this->getUser()->isLoggedIn() || (!$this->getUser()->isInRole('admin') && !$this->getUser()->isInRole('organiser') && !$this->getUser()->isInRole('accountant'))) {
             $this->redirect('Homepage:');
         }
     }
@@ -40,8 +50,22 @@ final class ManagementPresenter extends BasePresenter
      * Get interpret ID.
 	 */
     public function renderInterpretEdit(int $bandID): void
-	{
+	{  
+        if (!$this->getUser()->isLoggedIn() || (!$this->getUser()->isInRole('admin') && !$this->getUser()->isInRole('organiser'))) {
+            $this->redirect('Homepage:');
+        }
+
         $this->template->bandID = $bandID;
+    }
+
+    /**
+	 * Check access roles.
+	 */
+    public function renderInterpretInsert(): void
+	{
+        if (!$this->getUser()->isLoggedIn() || (!$this->getUser()->isInRole('admin') && !$this->getUser()->isInRole('organiser'))) {
+            $this->redirect('Homepage:');
+        }
     }
 
     /**
@@ -49,7 +73,21 @@ final class ManagementPresenter extends BasePresenter
 	 */
     public function renderFestivalEdit(int $festivalID): void
 	{
+        if (!$this->getUser()->isLoggedIn() || (!$this->getUser()->isInRole('admin') && !$this->getUser()->isInRole('organiser'))) {
+            $this->redirect('Homepage:');
+        }
+
         $this->template->festivalID = $festivalID;
+    }
+
+    /**
+	 * Check access roles.
+	 */
+    public function renderFestivalInsert(): void
+	{
+        if (!$this->getUser()->isLoggedIn() || (!$this->getUser()->isInRole('admin') && !$this->getUser()->isInRole('organiser'))) {
+            $this->redirect('Homepage:');
+        }
     }
 
     /**
@@ -57,6 +95,10 @@ final class ManagementPresenter extends BasePresenter
 	 */
     public function renderFestivalStageInsert(int $festivalID, int $stageNumber): void
 	{
+        if (!$this->getUser()->isLoggedIn() || (!$this->getUser()->isInRole('admin') && !$this->getUser()->isInRole('organiser'))) {
+            $this->redirect('Homepage:');
+        }
+
         $this->template->festivalID = $festivalID;
         $this->template->stageNumber = $stageNumber;
     }
@@ -66,9 +108,45 @@ final class ManagementPresenter extends BasePresenter
 	 */
     public function renderFestivalStageEdit(int $festivalID, int $stageID): void
 	{
+        if (!$this->getUser()->isLoggedIn() || (!$this->getUser()->isInRole('admin') && !$this->getUser()->isInRole('organiser'))) {
+            $this->redirect('Homepage:');
+        }
+
         $this->template->festivalID = $festivalID;
         $this->template->stageID = $stageID;
     }
+
+    /**
+	 * Check access roles & search account.
+	 */
+    public function renderAccount($email, $phone, $role): void
+	{
+        if (!$this->getUser()->isLoggedIn() || (!$this->getUser()->isInRole('admin'))) {
+            $this->redirect('Homepage:');
+        }
+
+        $this->accountManagerModel->searchAccount($this, $email, $phone, $role);
+    }
+
+    /**
+	 * Check access roles & edit account.
+	 */
+    public function renderAccountEdit($divID): void
+	{
+        if (!$this->getUser()->isLoggedIn() || (!$this->getUser()->isInRole('admin'))) {
+            $this->redirect('Homepage:');
+        }
+
+        $this->template->divID = $divID;
+    }
+
+    /**
+	 * Search reservation.
+	 */
+    public function renderReservation($reservationID, $email, $festival) {
+		$this->reservationManagerModel->searchReservation($this, $reservationID, $email, $festival);
+    }  
+
     
     /**
      * ---------------------------------------- INSERT INTERPRET ----------------------------------------
@@ -258,5 +336,84 @@ final class ManagementPresenter extends BasePresenter
 
         $this->festivalManagerModel->deleteStage($this, $form);
     }
-            
+
+    /**
+	 * ---------------------------------------- RESERVATIONS ----------------------------------------
+	 */
+
+    /**
+     * Search reservation form factory.
+     */
+    protected function createComponentSearchReservationsForm(): Form
+    {
+        return $this->reservationManagerModel->createSearchReservationsForm($this);
+    }
+
+    /**
+	 * Search reservation.
+	 */
+    public function searchReservation(Form $form, \stdClass $values): void
+    {
+        $this->redirect('Management:reservation', $values->rezID, $values->email, $values->festival);
+    }
+
+    /**
+	 * Set reservation state to paid.
+	 */
+	public function handlePaid(int $resID): void
+	{
+        $this->reservationManagerModel->paid($this, $resID, 1);
+    }
+
+    /**
+	 * Set reservation state to unpaid.
+	 */
+	public function handleUnpaid(int $resID): void
+	{
+        $this->reservationManagerModel->paid($this, $resID, 0);
+    }
+
+    /**
+	 * ---------------------------------------- ACCOUNTS ----------------------------------------
+	 */
+    
+    /**
+     * Search account form factory.
+     */
+    protected function createComponentAccountSearchForm(): Form
+    {
+        return $this->accountManagerModel->createAccountSearchForm($this);
+    }
+
+    /**
+	 * Search account.
+	 */
+    public function searchAccount(Form $form, \stdClass $values): void
+    {
+        $this->redirect('Management:account', $values->email, $values->phone, $values->role);
+    }
+
+    /**
+     * Edit account form factory.
+     */
+    protected function createComponentAccountEditForm(): Form
+    {
+        return $this->accountManagerModel->createAccountEditForm($this);
+    }
+    
+    /**
+     * Edit account.
+	 */
+    public function updateAccount(Form $form, \stdClass $values): void
+    {
+        $this->accountManagerModel->updateAccount($this, $values, $form);        
+    }
+    
+    /**
+	 * Delete account.
+	 */
+	public function handleDeleteAccount(int $divID): void
+	{
+        $this->accountManagerModel->deleteAccount($this, $divID);
+    }
 }

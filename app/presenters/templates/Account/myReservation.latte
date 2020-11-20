@@ -28,17 +28,18 @@
               <div class="row">
                 <div class="col-md-8">
                   <h4><em><a style="color:#f33f3f;" n:href="Festival:info, $festivals[$i++]">{$festivals[$i++]}</a></em>, {$festivals[$i++]}, {$festivals[$i++]},- Kč</h4>
-                  <p>počet vstupenek: <b>{$reservation->pocet_vstupenek}</b></p>
+                  <p>Počet vstupenek: <b>{$reservation->pocet_vstupenek}</b></p>
+                  <p>Číslo rezervace: <b>{$reservation->rez_ID}</b></p>
                   <p>
                     {if ($reservation->uhrazeno == 0)}
-                      <b>Neuhrazeno</b>, prosím zaplaťte dle instrukcí v emailu. Na uhrazení máte 10 dní od rezervace, tedy do <b>{date( 'j.n.Y', strtotime( "$reservation->cas + 10 day" ))}.</b>
+                      <b style="color: red;">Neuhrazeno</b>, prosím zaplaťte {$festivals[$i-1] * $reservation->pocet_vstupenek},- Kč dle instrukcí v emailu. Na uhrazení máte 10 dní od rezervace, tedy do <b>{date( 'j.n.Y', strtotime( "$reservation->cas + 10 day" ))}.</b>
                     {else}
-                      <b>Uhrazeno</b>.
+                      <b style="color: green;">Uhrazeno</b>.
                     {/if}
                   </p>
                 </div>
                 <div class="col-md-4">
-                  <h4><a style="color:#f33f3f;" href="#">{$festivals[$i++]}</a></h4>
+                  <h4><a style="color:#f33f3f;" n:href="Search:, $festivals[$i]">{$festivals[$i++]}</a>, {$festivals[$i++]}</h4>
                 </div>
               </div>
             </div>
