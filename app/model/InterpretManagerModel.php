@@ -33,7 +33,8 @@ class InterpretManagerModel
 	{
 		$form = new Form;
         
-        $form->addText('name', 'Název: ')
+		$form->addText('name', 'Název: ')
+			->setDefaultValue('Jméno interpreta')
             ->setRequired('Prosím zadejte název kapely.')
 			->setHtmlAttribute('placeholder', 'Název kapely')
 			->addRule($form::MAX_LENGTH, 'Název je příliš dlouhý', 50)

@@ -63,7 +63,7 @@ class FestivalManagerModel
 			->setHtmlAttribute('class', 'form-control');
 			
 		$form->addText('address', 'Adresa: ')
-			->setDefaultValue('Brno, Festivalová 123')
+			->setDefaultValue('Festivalová 123')
             ->setRequired('Prosím zadejte adresu festivalu.')
 			->setHtmlAttribute('placeholder', 'Adresa festivalu')
 			->addRule($form::MAX_LENGTH, 'Adresa je příliš dlouhá', 50)

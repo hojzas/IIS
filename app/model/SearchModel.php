@@ -72,9 +72,10 @@ class SearchModel
 			festival.misto LIKE ? OR
 			festival.adresa LIKE ? OR
 			festival.cena LIKE ? OR
-			:stage:vystupuje.int_id:tagovani.zan_id.nazev LIKE ?
+			:stage:vystupuje.int_id:tagovani.zan_id.nazev LIKE ? OR
+			:stage:vystupuje.int_id.nazev LIKE ?
 			', 
-			$term, $term, $term, $term, $term, $term)
+			$term, $term, $term, $term, $term, $term, $term)
 			->order('datum');
 
 		if (!$tookPlace) {

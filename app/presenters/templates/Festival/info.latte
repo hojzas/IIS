@@ -42,7 +42,14 @@
           </div>
 
           {if $user->isInRole('admin') || $user->isInRole('organiser')}
-            <a n:href="Management:festivalEdit $festival->fes_ID" class="filled-button">Upravit obsah</a>
+            <div class="col-md-4">
+              <a n:href="Management:festivalEdit $festival->fes_ID" class="filled-button">Upravit obsah</a>
+            </div>
+          {/if}
+          {if $user->isInRole('admin') || $user->isInRole('organiser') || $user->isInRole('accountant')}
+            <div class="col-md-4">
+              <a n:href="Management:reservation, null, null, $festival->fes_ID" class="filled-button">Zobrazit rezervace</a>
+            </div>
           {/if}
           
         </div>

@@ -41,7 +41,7 @@ final class FestivalPresenter extends BasePresenter
 
 		// paginating
 		$lastPage = 0;
-		$this->template->festivals = $festivals->page($page, 3, $lastPage);
+		$this->template->festivals = $festivals->page($page, 9, $lastPage);
 		$this->template->page = $page;
 		$this->template->lastPage = $lastPage;
 	}
